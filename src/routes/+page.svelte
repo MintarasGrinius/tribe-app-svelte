@@ -1,34 +1,46 @@
 <script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	import { enhance } from '$app/forms';
+	import { redirect } from '@sveltejs/kit';
+	/** @type {import('./$types').ActionData} */
+	export let form;
+	if (form?.success) {
+		console.log(form?.success);
+
+		redirect(307, '/dashboard');
+	}
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>Tribe</title>
+	<meta name="description" content="Tribe demo" />
 </svelte:head>
 
 <section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
+	<h1>tribe</h1>
 
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
+	<form class="login-container" method="POST">
+		<input value="email@email.com" name="email" type="email" required />
+		<input value="Password01" name="password" type="password" required />
+		<button type="submit">Submit</button>
+		{#if form?.message}
+			<p class="error">{form?.message}</p>
+		{/if}
+	</form>
 </section>
 
 <style>
+	.error {
+		color: red;
+		margin: 0;
+	}
+	.login-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+	}
+
 	section {
 		display: flex;
 		flex-direction: column;
@@ -39,21 +51,5 @@
 
 	h1 {
 		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
 	}
 </style>
