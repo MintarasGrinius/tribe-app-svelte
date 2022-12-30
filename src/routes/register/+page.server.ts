@@ -1,3 +1,4 @@
+import { redirect } from '@sveltejs/kit';
 /** @type {import('./$types').Actions} */
 
 import { PrismaClient } from '@prisma/client';
@@ -24,9 +25,6 @@ export const actions: Actions = {
 			}
 		});
 
-		return {
-			success: true,
-			body: user
-		};
+		throw redirect(303, '/');
 	}
 };

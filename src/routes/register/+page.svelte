@@ -1,27 +1,20 @@
 <script>
-	/** @type {import('./$types').ActionData} */
 	export let form;
 	console.log(form);
 </script>
 
-<svelte:head>
-	<title>Tribe</title>
-	<meta name="description" content="Tribe demo" />
-</svelte:head>
-
 <section>
-	<h1>tribe</h1>
-
-	<form class="login-container" method="POST">
+	<h1>{'Register'}</h1>
+	<form method="POST">
 		<input value="email@email.com" name="email" type="email" required />
 		<input value="Password01" name="password" type="password" required />
+		<input value="Mintaras Grinius" name="name" required />
+		<input value="+2348123456789" name="phone" type="tel" required />
+		<input value={27} name="age" type="number" required />
 		<div class="buttons">
-			<button type="submit">Login</button>
-			<a href="/register">Register</a>
+			<button type="submit">Register</button>
+			<a href="/">Login</a>
 		</div>
-		{#if form?.message}
-			<p class="error">{form?.message}</p>
-		{/if}
 	</form>
 </section>
 
@@ -31,11 +24,8 @@
 		gap: 1rem;
 		align-items: center;
 	}
-	.error {
-		color: red;
-		margin: 0;
-	}
-	.login-container {
+
+	form {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -49,9 +39,5 @@
 		justify-content: center;
 		align-items: center;
 		flex: 0.6;
-	}
-
-	h1 {
-		width: 100%;
 	}
 </style>
