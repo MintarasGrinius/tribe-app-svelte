@@ -1,6 +1,5 @@
-import { redirect } from '@sveltejs/kit';
 /** @type {import('./$types').Actions} */
-
+import { redirect, fail } from '@sveltejs/kit';
 import { PrismaClient } from '@prisma/client';
 import type { Actions } from '@sveltejs/kit';
 
@@ -15,7 +14,47 @@ export const actions: Actions = {
 		const name = data.get('name');
 		const age = data.get('age');
 
-		const user = await prisma.user.create({
+		let errors;
+
+		if (!email) {
+			errors = {
+				email: 'Email is required'
+			};
+		}
+
+		if (!password) {
+			errors = {
+				...errors,
+				password: 'Password is required'
+			};
+		}
+
+		if (!phone) {
+			errors = {
+				...errors,
+				phone: 'Phone is required'
+			};
+		}
+
+		if (!name) {
+			errors = {
+				...errors,
+				name: 'Name is required'
+			};
+		}
+
+		if (!age) {
+			errors = {
+				...errors,
+				age: 'Age is required'
+			};
+		}
+
+		if (errors) {
+			return fail(400, { errors: errors });
+		}
+
+		await prisma.user.create({
 			data: {
 				email: email as string,
 				password: password as string,

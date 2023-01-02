@@ -1,5 +1,4 @@
 /** @type {import('./$types').Actions} */
-
 import { PrismaClient } from '@prisma/client';
 import { fail, redirect, type Actions } from '@sveltejs/kit';
 
