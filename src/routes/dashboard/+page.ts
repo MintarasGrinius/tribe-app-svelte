@@ -2,6 +2,6 @@ import type { PageLoad } from './$types';
 
 export const load = (({ params }) => {
 	return {
-		events: []
+		events: new Array(9).fill('')
 	};
 }) satisfies PageLoad;

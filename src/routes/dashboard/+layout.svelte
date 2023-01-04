@@ -4,7 +4,7 @@
 	import Modal from './Modal.svelte';
 </script>
 
-<section class="text-gray-400 bg-gray-900 body-font min-h-screen">
+<section class="text-gray-400 bg-gray-900 body-font min-h-screen flex flex-col">
 	<Header />
 	<slot />
 	<Footer />
