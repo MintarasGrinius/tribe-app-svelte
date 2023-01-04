@@ -1,3 +1,11 @@
+<script lang="ts">
+	let selectedDate: string;
+
+	function handleDateChange(event) {
+		selectedDate = event.target.value;
+	}
+</script>
+
 <section class="text-gray-400 bg-gray-900 body-font relative">
 	<div class="container px-5 py-14 mx-auto flex sm:flex-nowrap flex-wrap">
 		<div
@@ -34,11 +42,22 @@
 				Post-ironic portland shabby chic echo park, banjo fashion axe
 			</p>
 			<div class="relative mb-4">
-				<label for="name" class="leading-7 text-sm text-gray-400">Name</label>
+				<label for="title" class="leading-7 text-sm text-gray-400">Title</label>
 				<input
 					type="text"
-					id="name"
-					name="name"
+					id="title"
+					name="title"
+					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+				/>
+			</div>
+			<div class="relative mb-4">
+				<label for="date" class="leading-7 text-sm text-gray-400">Date</label>
+				<input
+					type="date"
+					bind:value={selectedDate}
+					on:change={handleDateChange}
+					name="date"
+					id="date"
 					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 			</div>
