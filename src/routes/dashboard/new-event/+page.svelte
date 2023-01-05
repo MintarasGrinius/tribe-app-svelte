@@ -1,4 +1,8 @@
 <script lang="ts">
+	/** @type {import('./$types').ActionData} */
+	export let form;
+	console.log(form);
+
 	let selectedDate: string;
 
 	function handleDateChange(event) {
@@ -36,10 +40,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="lg:w-1/3 md:w-1/2 flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
-			<h2 class="text-white text-lg mb-1 font-medium title-font">Feedback</h2>
+		<form
+			method="POST"
+			class="lg:w-1/3 md:w-1/2 flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0"
+		>
+			<h2 class="text-white text-lg mb-1 font-medium title-font">Create new event</h2>
 			<p class="leading-relaxed mb-5">
-				Post-ironic portland shabby chic echo park, banjo fashion axe
+				Are you planning a special event? Our website makes it easy to create and share an event
+				with just a few clicks. So go ahead, start planning your event today!
 			</p>
 			<div class="relative mb-4">
 				<label for="title" class="leading-7 text-sm text-gray-400">Title</label>
@@ -62,29 +70,18 @@
 				/>
 			</div>
 			<div class="relative mb-4">
-				<label for="email" class="leading-7 text-sm text-gray-400">Email</label>
-				<input
-					type="email"
-					id="email"
-					name="email"
-					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-				/>
-			</div>
-			<div class="relative mb-4">
-				<label for="message" class="leading-7 text-sm text-gray-400">Message</label>
+				<label for="description" class="leading-7 text-sm text-gray-400">Description</label>
 				<textarea
-					id="message"
-					name="message"
+					id="description"
+					name="description"
 					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 h-32 text-base outline-none text-gray-100 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
 				/>
 			</div>
 			<button
+				type="submit"
 				class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg"
 				>Button</button
 			>
-			<p class="text-xs text-gray-400 text-opacity-90 mt-3">
-				Chicharrones blog helvetica normcore iceland tousled brook viral artisan.
-			</p>
-		</div>
+		</form>
 	</div>
 </section>
