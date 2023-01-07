@@ -13,7 +13,7 @@
 			{/if}
 			<a href="/" class="mr-5 hover:text-white">Log In</a>
 			<form action="/logout" method="POST">
-				<a href="/" class="mr-5 hover:text-white">Log Out</a>
+				<button class="mr-5 hover:text-white">Log Out</button>
 			</form>
 
 			<a href="/dashboard" class="hover:text-white">Events</a>
