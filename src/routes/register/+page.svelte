@@ -1,9 +1,9 @@
 <script>
-	import { applyAction, enhance } from '$app/forms';
-	import PocketBase from 'pocketbase';
 	/** @type {import('./$types').ActionData} */
 	export let form;
-	const pb = new PocketBase('http://127.0.0.1:8090');
+	console.log(form);
+
+	const missingDataError = 'Field is required';
 </script>
 
 <section class="text-gray-400 bg-gray-900 body-font h-screen">
@@ -18,12 +18,6 @@
 			</p>
 		</div>
 		<form
-			use:enhance={() => {
-				return async ({ result }) => {
-					pb.authStore.loadFromCookie(document.cookie);
-					await applyAction(result);
-				};
-			}}
 			method="POST"
 			class="lg:w-2/6 md:w-1/2 bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0"
 		>
@@ -34,11 +28,12 @@
 					type="email"
 					id="email"
 					name="email"
+					value={form?.email.value || ''}
 					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
-					{#if form?.errors.email}
-						<p class="error text-xs">{form?.errors.email}</p>
+					{#if form?.email?.missing}
+						<p class="error text-red-500 text-xs">{missingDataError}</p>
 					{/if}
 				</div>
 			</div>
@@ -47,67 +42,44 @@
 				<input
 					id="name"
 					name="name"
+					value={form?.name.value || ''}
 					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
-					{#if form?.errors.name}
-						<p class="error text-xs">{form?.errors.name}</p>
+					{#if form?.name?.missing}
+						<p class="error text-red-500 text-xs">{missingDataError}</p>
 					{/if}
 				</div>
 			</div>
-			<!-- <div class="relative">
-				<label for="phone" class="leading-7 text-sm text-gray-400">Phone</label>
-				<input
-					id="phone"
-					name="phone"
-					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-				/>
-				<div class="h-5">
-					{#if form?.errors.phone}
-						<p class="error text-xs">{form?.errors.phone}</p>
-					{/if}
-				</div>
-			</div>
-			<div class="relative">
-				<label for="age" class="leading-7 text-sm text-gray-400">Age</label>
-				<input
-					id="age"
-					name="age"
-					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-				/>
-				<div class="h-5">
-					{#if form?.errors.age}
-						<p class="error text-xs">{form?.errors.age}</p>
-					{/if}
-				</div>
-			</div> -->
 			<div class="relative mb-2">
 				<label for="password" class="leading-7 text-sm text-gray-400">Password</label>
 				<input
 					type="password"
 					id="password"
 					name="password"
+					value={form?.password.value || ''}
 					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
-					{#if form?.errors.password}
-						<p class="error text-xs">{form?.errors.password}</p>
+					{#if form?.password?.missing}
+						<p class="error text-red-500 text-xs">{missingDataError}</p>
 					{/if}
 				</div>
 			</div>
 
 			<div class="relative mb-2">
-				<label for="passwordConfirm" class="leading-7 text-sm text-gray-400">Confirm Password</label
+				<label for="confirmPassword" class="leading-7 text-sm text-gray-400">Confirm Password</label
 				>
 				<input
 					type="password"
-					id="passwordConfirm"
-					name="passwordConfirm"
+					id="confirmPassword"
+					name="confirmPassword"
+					value={form?.confirmPassword.value || ''}
 					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
-					{#if form?.errors.password}
-						<p class="error text-xs">{form?.errors.password}</p>
+					{#if form?.confirmPassword?.missing}
+						<p class="error text-red-500 text-xs">{missingDataError}</p>
 					{/if}
 				</div>
 			</div>

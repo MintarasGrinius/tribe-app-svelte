@@ -1,10 +1,10 @@
 import { serializeNonPOJOs } from './lib/helpers';
 // src/hooks.server.js
 import PocketBase from 'pocketbase';
-import { redirect } from '@sveltejs/kit';
+import { redirect, type Handle } from '@sveltejs/kit';
 
 /** @type {import('@sveltejs/kit').Handle} */
-export async function handle({ event, resolve }) {
+export const handle = (async ({ event, resolve }) => {
 	event.locals.pb = new PocketBase('http://127.0.0.1:8090');
 
 	// load the store data from the request cookie string
@@ -35,4 +35,4 @@ export async function handle({ event, resolve }) {
 	response.headers.set('set-cookie', event.locals.pb.authStore.exportToCookie());
 
 	return response;
-}
+}) satisfies Handle;

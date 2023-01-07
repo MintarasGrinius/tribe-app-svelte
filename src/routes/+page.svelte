@@ -1,7 +1,4 @@
 <script>
-	import { enhance } from '$app/forms';
-	import { redirect } from '@sveltejs/kit';
-
 	/** @type {import('./$types').ActionData} */
 	export let form;
 	export let data;

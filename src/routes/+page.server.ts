@@ -1,10 +1,7 @@
 import PocketBase from 'pocketbase';
 /** @type {import('./$types').Actions} */
 import { redirect, fail } from '@sveltejs/kit';
-import { PrismaClient } from '@prisma/client';
 import type { Actions } from '@sveltejs/kit';
-
-const prisma = new PrismaClient();
 
 export const actions: Actions = {
 	default: async ({ locals, request }) => {
