@@ -1,18 +1,20 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { currentUser } from '$lib/pocketbase';
-	export let user;
-	console.log('currentUser', currentUser.subscribe);
+	export let user: any;
+	console.log('user', user);
 </script>
 
 <header class="text-gray-400 sticky top-0 bg-gray-900/50 body-font">
 	<div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
 		<nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
-			{#if !$currentUser}
-				<a href="/" class="mr-5 hover:text-white">Log In</a>
-			{:else}
-				<a href="/" class="mr-5 hover:text-white">Log Out</a>
+			{#if user}
+				<div>{user?.email}</div>
 			{/if}
+			<a href="/" class="mr-5 hover:text-white">Log In</a>
+			<form action="/logout" method="POST">
+				<a href="/" class="mr-5 hover:text-white">Log Out</a>
+			</form>
 
 			<a href="/dashboard" class="hover:text-white">Events</a>
 		</nav>

@@ -9,7 +9,6 @@ export const actions: Actions = {
 		const title = data.get('title');
 		const date = data.get('date');
 		const description = data.get('description');
-		console.log(title, date, description);
 		const event = await prisma.event.create({
 			data: {
 				title: title as string,

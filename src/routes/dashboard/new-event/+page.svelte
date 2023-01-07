@@ -1,7 +1,6 @@
 <script lang="ts">
 	/** @type {import('./$types').ActionData} */
 	export let form;
-	console.log(form);
 
 	let selectedDate: string;
 

@@ -1,7 +1,10 @@
 <script>
+	import { enhance } from '$app/forms';
+	import { redirect } from '@sveltejs/kit';
+
 	/** @type {import('./$types').ActionData} */
 	export let form;
-	console.log(form);
+	export let data;
 </script>
 
 <svelte:head>
@@ -28,8 +31,7 @@
 			<div class="relative mb-4">
 				<label for="full-name" class="leading-7 text-sm text-gray-400">Email</label>
 				<input
-					required
-					value="email@email.com"
+					value={form?.email ?? 'email@email.co'}
 					type="email"
 					id="email"
 					name="email"
@@ -39,7 +41,6 @@
 			<div class="relative mb-2">
 				<label for="email" class="leading-7 text-sm text-gray-400">Password</label>
 				<input
-					required
 					type="password"
 					value="Password01"
 					id="password"
@@ -48,8 +49,11 @@
 				/>
 			</div>
 			<div class="h-5">
-				{#if form?.message}
-					<p class="error text-xs">{form?.message}</p>
+				{#if form?.incorrect}
+					<p class="error text-xs">{'The email or password is incorrect'}</p>
+				{/if}
+				{#if form?.missing}
+					<p class="error text-xs">{'Email and password fields are required'}</p>
 				{/if}
 			</div>
 			<button

@@ -13,11 +13,9 @@ export const actions: Actions = {
 		};
 
 		try {
-			console.log(data);
 			await locals.pb.collection('users').create(data);
 			await locals.pb.collection('users').authWithPassword(data.email, data.password);
 		} catch (error) {
-			console.log(error);
 			throw error;
 		}
 

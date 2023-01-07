@@ -1,4 +1,5 @@
 import { redirect } from '@sveltejs/kit';
+import { serializeNonPOJOs } from './../lib/helpers';
 export const load = ({ locals }) => {
 	if (locals.user) {
 		return {

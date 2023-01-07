@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { redirect } from '@sveltejs/kit';
 	import type { PageData } from './$types';
 	import Footer from './Footer.svelte';
 	import Header from './Header.svelte';
