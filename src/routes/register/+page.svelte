@@ -1,7 +1,9 @@
 <script>
+	import { applyAction, enhance } from '$app/forms';
+	import PocketBase from 'pocketbase';
 	/** @type {import('./$types').ActionData} */
 	export let form;
-	console.log(form);
+	const pb = new PocketBase('http://127.0.0.1:8090');
 </script>
 
 <section class="text-gray-400 bg-gray-900 body-font h-screen">
@@ -16,12 +18,18 @@
 			</p>
 		</div>
 		<form
+			use:enhance={() => {
+				return async ({ result }) => {
+					pb.authStore.loadFromCookie(document.cookie);
+					await applyAction(result);
+				};
+			}}
 			method="POST"
 			class="lg:w-2/6 md:w-1/2 bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0"
 		>
 			<h2 class="text-white text-lg font-medium title-font mb-5">Register</h2>
 			<div class="relative">
-				<label for="full-name" class="leading-7 text-sm text-gray-400">Email</label>
+				<label for="email" class="leading-7 text-sm text-gray-400">Email</label>
 				<input
 					type="email"
 					id="email"
@@ -35,7 +43,7 @@
 				</div>
 			</div>
 			<div class="relative">
-				<label for="full-name" class="leading-7 text-sm text-gray-400">Name</label>
+				<label for="name" class="leading-7 text-sm text-gray-400">Name</label>
 				<input
 					id="name"
 					name="name"
@@ -47,8 +55,8 @@
 					{/if}
 				</div>
 			</div>
-			<div class="relative">
-				<label for="full-name" class="leading-7 text-sm text-gray-400">Phone</label>
+			<!-- <div class="relative">
+				<label for="phone" class="leading-7 text-sm text-gray-400">Phone</label>
 				<input
 					id="phone"
 					name="phone"
@@ -61,7 +69,7 @@
 				</div>
 			</div>
 			<div class="relative">
-				<label for="full-name" class="leading-7 text-sm text-gray-400">Age</label>
+				<label for="age" class="leading-7 text-sm text-gray-400">Age</label>
 				<input
 					id="age"
 					name="age"
@@ -72,13 +80,29 @@
 						<p class="error text-xs">{form?.errors.age}</p>
 					{/if}
 				</div>
-			</div>
+			</div> -->
 			<div class="relative mb-2">
-				<label for="email" class="leading-7 text-sm text-gray-400">Password</label>
+				<label for="password" class="leading-7 text-sm text-gray-400">Password</label>
 				<input
 					type="password"
 					id="password"
 					name="password"
+					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+				/>
+				<div class="h-5">
+					{#if form?.errors.password}
+						<p class="error text-xs">{form?.errors.password}</p>
+					{/if}
+				</div>
+			</div>
+
+			<div class="relative mb-2">
+				<label for="passwordConfirm" class="leading-7 text-sm text-gray-400">Confirm Password</label
+				>
+				<input
+					type="password"
+					id="passwordConfirm"
+					name="passwordConfirm"
 					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">

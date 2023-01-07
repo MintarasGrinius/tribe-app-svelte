@@ -2,10 +2,7 @@
 	import BigCard from './BigCard.svelte';
 	import LittleCard from './LittleCard.svelte';
 	import type { PageData } from './$types';
-	import { sliceIntoChunks } from './utils';
-
 	export let data: PageData;
-	console.log(sliceIntoChunks(data.events));
 </script>
 
 <div class="p-5 flex flex-wrap w-screen">

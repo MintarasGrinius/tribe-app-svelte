@@ -683,6 +683,11 @@
   "resolved" "https://registry.npmjs.org/pify/-/pify-2.3.0.tgz"
   "version" "2.3.0"
 
+"pocketbase@^0.9.1":
+  "integrity" "sha512-a9S/WHak+mgr3WI8bD2tz3lFVFzoy6ZgKTBlUXwIH4VLTKVU3JKeAKxqIFBF7av4qblmB+52tX8sWLS08Ftm/w=="
+  "resolved" "https://registry.npmjs.org/pocketbase/-/pocketbase-0.9.1.tgz"
+  "version" "0.9.1"
+
 "postcss-import@^14.1.0":
   "integrity" "sha512-flwI+Vgm4SElObFVPpTIT7SU7R3qk2L7PyduMcokiaVKuWv9d/U+Gm/QAd8NDLuykTWTkcrjOeD2Pp1rMeBTGw=="
   "resolved" "https://registry.npmjs.org/postcss-import/-/postcss-import-14.1.0.tgz"
@@ -746,7 +751,7 @@
   "resolved" "https://registry.npmjs.org/prettier/-/prettier-2.8.1.tgz"
   "version" "2.8.1"
 
-"prisma@*", "prisma@^4.8.0":
+"prisma@*":
   "integrity" "sha512-DWIhxvxt8f4h6MDd35mz7BJff+fu7HItW3WPDIEpCR3RzcOWyiHBbLQW5/DOgmf+pRLTjwXQob7kuTZVYUAw5w=="
   "resolved" "https://registry.npmjs.org/prisma/-/prisma-4.8.0.tgz"
   "version" "4.8.0"

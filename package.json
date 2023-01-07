@@ -33,6 +33,6 @@
 		"esbuild-darwin-arm64": "^0.15.18",
 		"esbuild-svelte": "^0.7.3",
 		"esbuild-wasm": "^0.16.13",
-		"prisma": "^4.8.0"
+		"pocketbase": "^0.9.1"
 	}
 }
