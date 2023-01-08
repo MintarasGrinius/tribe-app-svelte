@@ -1,7 +1,7 @@
 <script>
 	/** @type {import('./$types').ActionData} */
 	export let form;
-	console.log(form);
+	console.log('formformformform', form);
 
 	const missingDataError = 'Field is required';
 </script>
@@ -25,15 +25,14 @@
 			<div class="relative">
 				<label for="email" class="leading-7 text-sm text-gray-400">Email</label>
 				<input
-					type="email"
 					id="email"
 					name="email"
-					value={form?.email.value || ''}
+					value={form?.email?.value || ''}
 					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
-					{#if form?.email?.missing}
-						<p class="error text-red-500 text-xs">{missingDataError}</p>
+					{#if form?.email?.message}
+						<p class="error text-red-500 text-xs">{form?.email?.message}</p>
 					{/if}
 				</div>
 			</div>
@@ -42,12 +41,12 @@
 				<input
 					id="name"
 					name="name"
-					value={form?.name.value || ''}
+					value={form?.name?.value || ''}
 					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
-					{#if form?.name?.missing}
-						<p class="error text-red-500 text-xs">{missingDataError}</p>
+					{#if form?.name?.message}
+						<p class="error text-red-500 text-xs">{form?.name?.message}</p>
 					{/if}
 				</div>
 			</div>
@@ -57,29 +56,29 @@
 					type="password"
 					id="password"
 					name="password"
-					value={form?.password.value || ''}
+					value={form?.password?.value || ''}
 					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
-					{#if form?.password?.missing}
-						<p class="error text-red-500 text-xs">{missingDataError}</p>
+					{#if form?.password?.message}
+						<p class="error text-red-500 text-xs">{form?.password?.message}</p>
 					{/if}
 				</div>
 			</div>
 
 			<div class="relative mb-2">
-				<label for="confirmPassword" class="leading-7 text-sm text-gray-400">Confirm Password</label
+				<label for="passwordConfirm" class="leading-7 text-sm text-gray-400">Confirm Password</label
 				>
 				<input
 					type="password"
-					id="confirmPassword"
-					name="confirmPassword"
-					value={form?.confirmPassword.value || ''}
+					id="passwordConfirm"
+					name="passwordConfirm"
+					value={form?.passwordConfirm?.value || ''}
 					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
-					{#if form?.confirmPassword?.missing}
-						<p class="error text-red-500 text-xs">{missingDataError}</p>
+					{#if form?.passwordConfirm?.message}
+						<p class="error text-red-500 text-xs">{form?.passwordConfirm?.message}</p>
 					{/if}
 				</div>
 			</div>
