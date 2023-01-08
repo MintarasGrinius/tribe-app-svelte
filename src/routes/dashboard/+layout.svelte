@@ -1,8 +1,8 @@
 <script lang="ts">
+	import Footer from '$lib/layout/Footer.svelte';
+	import Header from '$lib/layout/Header.svelte';
 	import { redirect } from '@sveltejs/kit';
 	import type { PageData } from './$types';
-	import Footer from './Footer.svelte';
-	import Header from './Header.svelte';
 	export let data: PageData;
 </script>
 

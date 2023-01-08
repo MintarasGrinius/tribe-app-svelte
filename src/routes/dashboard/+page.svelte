@@ -1,6 +1,6 @@
 <script lang="ts">
-	import BigCard from './BigCard.svelte';
-	import LittleCard from './LittleCard.svelte';
+	import BigCard from '$lib/cards/BigCard.svelte';
+	import LittleCard from '$lib/cards/LittleCard.svelte';
 	import type { PageData } from './$types';
 	import { currentUser } from '$lib/pocketbase';
 	export let data: PageData;

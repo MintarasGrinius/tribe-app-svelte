@@ -47,10 +47,10 @@
 			</div>
 			<div class="h-5">
 				{#if form?.incorrect}
-					<p class="error text-xs">{'The email or password is incorrect'}</p>
+					<p class="error text-red-500 text-xs">{'The email or password is incorrect'}</p>
 				{/if}
 				{#if form?.missing}
-					<p class="error text-xs">{'Email and password fields are required'}</p>
+					<p class="error text-red-500 text-xs">{'Email and password fields are required'}</p>
 				{/if}
 			</div>
 			<button
