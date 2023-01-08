@@ -1,5 +1,3 @@
-import { pb } from './../lib/pocketbase';
-import { redirect } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 
 export const load = (({ locals }) => {
