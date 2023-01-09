@@ -2,11 +2,13 @@
 	/** @type {import('./$types').ActionData} */
 	export let form;
 	console.log('formformformform', form);
-
-	const missingDataError = 'Field is required';
+	let image;
 </script>
 
-<section class="text-gray-400 bg-gray-900 body-font h-screen">
+<section
+	on:click={() => console.log(image)}
+	class="text-gray-400 z-50 bg-gray-900 body-font h-screen"
+>
 	<div class="container px-5 py-24 mx-auto flex flex-wrap items-center h-screen">
 		<div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
 			<h1 class="title-font font-medium text-3xl text-white">
@@ -47,6 +49,23 @@
 				<div class="h-5">
 					{#if form?.name?.message}
 						<p class="error text-red-500 text-xs">{form?.name?.message}</p>
+					{/if}
+				</div>
+			</div>
+
+			<div class="relative">
+				<label for="avatar"
+					><div class="leading-7 text-sm text-gray-400">Profile image</div>
+					<div
+						class="cursor-pointer flex items-center justify-between px-3 h-10 w-full bg-gray-600 overflow-hidden bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 leading-8 transition-colors duration-200 ease-in-out"
+					>
+						<img src={'/icons/upload.svg'} alt="Upload icon" class="h-5 w-5 gray-400" />
+						<input id="avatar" name="avatar" type="file" accept="image/*" />
+					</div>
+				</label>
+				<div class="h-5">
+					{#if form?.avatar?.message}
+						<p class="error text-red-500 text-xs">{form?.avatar?.message}</p>
 					{/if}
 				</div>
 			</div>
