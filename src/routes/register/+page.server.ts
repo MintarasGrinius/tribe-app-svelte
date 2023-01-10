@@ -28,7 +28,7 @@ export const actions: Actions = {
 				email: { message: data?.email?.message, value: email },
 				name: { message: name ? data?.name?.message : 'Cannot be blank.', value: name },
 				password: { message: data?.password?.message, value: password },
-				avatar: { message: data?.avatar?.message, value: avatar },
+				avatar: { message: data?.avatar?.message, value: avatar.name },
 				passwordConfirm: {
 					message: data?.passwordConfirm?.message,
 					value: passwordConfirm

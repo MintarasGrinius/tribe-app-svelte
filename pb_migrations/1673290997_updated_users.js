@@ -1,0 +1,57 @@
+migrate((db) => {
+  const dao = new Dao(db)
+  const collection = dao.findCollectionByNameOrId("_pb_users_auth_")
+
+  // update
+  collection.schema.addField(new SchemaField({
+    "system": false,
+    "id": "users_avatar",
+    "name": "avatar",
+    "type": "file",
+    "required": true,
+    "unique": false,
+    "options": {
+      "maxSelect": 1,
+      "maxSize": 1,
+      "mimeTypes": [
+        "image/jpg",
+        "image/jpeg",
+        "image/png",
+        "image/svg+xml",
+        "image/gif"
+      ],
+      "thumbs": [
+        "50x50"
+      ]
+    }
+  }))
+
+  return dao.saveCollection(collection)
+}, (db) => {
+  const dao = new Dao(db)
+  const collection = dao.findCollectionByNameOrId("_pb_users_auth_")
+
+  // update
+  collection.schema.addField(new SchemaField({
+    "system": false,
+    "id": "users_avatar",
+    "name": "avatar",
+    "type": "file",
+    "required": true,
+    "unique": false,
+    "options": {
+      "maxSelect": 1,
+      "maxSize": 1,
+      "mimeTypes": [
+        "image/jpg",
+        "image/jpeg",
+        "image/png",
+        "image/svg+xml",
+        "image/gif"
+      ],
+      "thumbs": null
+    }
+  }))
+
+  return dao.saveCollection(collection)
+})

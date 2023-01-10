@@ -1,14 +1,10 @@
 <script>
 	/** @type {import('./$types').ActionData} */
 	export let form;
-	console.log('formformformform', form);
-	let image;
+	console.log('formformformform', form?.avatar);
 </script>
 
-<section
-	on:click={() => console.log(image)}
-	class="text-gray-400 z-50 bg-gray-900 body-font h-screen"
->
+<section class="text-gray-400 z-50 bg-gray-900 body-font h-screen">
 	<div class="container px-5 py-24 mx-auto flex flex-wrap items-center h-screen">
 		<div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
 			<h1 class="title-font font-medium text-3xl text-white">
@@ -20,6 +16,7 @@
 			</p>
 		</div>
 		<form
+			enctype="multipart/form-data"
 			method="POST"
 			class="lg:w-2/6 md:w-1/2 bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0"
 		>
@@ -29,7 +26,7 @@
 				<input
 					id="email"
 					name="email"
-					value={form?.email?.value || ''}
+					value={form?.email?.value || 'email@emaaaail.com'}
 					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
@@ -43,7 +40,7 @@
 				<input
 					id="name"
 					name="name"
-					value={form?.name?.value || ''}
+					value={form?.name?.value || 'name'}
 					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
@@ -60,6 +57,7 @@
 						class="cursor-pointer flex items-center justify-between px-3 h-10 w-full bg-gray-600 overflow-hidden bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 leading-8 transition-colors duration-200 ease-in-out"
 					>
 						<img src={'/icons/upload.svg'} alt="Upload icon" class="h-5 w-5 gray-400" />
+						<!-- value={form?.avatar?.value || ''} -->
 						<input id="avatar" name="avatar" type="file" accept="image/*" />
 					</div>
 				</label>
@@ -75,7 +73,7 @@
 					type="password"
 					id="password"
 					name="password"
-					value={form?.password?.value || ''}
+					value={form?.password?.value || 'Password01'}
 					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
@@ -92,7 +90,7 @@
 					type="password"
 					id="passwordConfirm"
 					name="passwordConfirm"
-					value={form?.passwordConfirm?.value || ''}
+					value={form?.passwordConfirm?.value || 'Password01'}
 					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
