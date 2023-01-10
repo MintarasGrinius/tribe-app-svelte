@@ -1,25 +1,41 @@
+import { fail, redirect } from '@sveltejs/kit';
 /** @type {import('./$types').Actions} */
-import { Prisma, PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import type { Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {
-	default: async ({ request }) => {
+	default: async ({ locals, request }) => {
 		const data = await request.formData();
 		const title = data.get('title');
-		const date = data.get('date');
 		const description = data.get('description');
-		const event = await prisma.event.create({
-			data: {
-				title: title as string,
-				date: date as string,
-				description: description as string,
-				author: {
-					connect: {
-						id: '63ade73015b9ec53d43ec291'
-					}
-				}
-			}
-		});
+		const location = data.get('location');
+		const date = data.get('date');
+		const type = data.get('type');
+		const theme = data.get('theme');
+		const user = data.get('user');
+
+		try {
+			const record = await locals.pb.collection('events').create({
+				title,
+				description,
+				location,
+				date,
+				type,
+				theme,
+				user
+			});
+		} catch (error: any) {
+			const { data } = error.data;
+			return fail(400, {
+				title: { message: data?.email?.message, value: data.title },
+				description: { message: data?.email?.message, value: data.description },
+				location: { message: data?.email?.message, value: data.location },
+				date: { message: data?.email?.message, value: data.date },
+				type: { message: data?.email?.message, value: data.type },
+				theme: { message: data?.email?.message, value: data.theme },
+				user: { message: data?.email?.message, value: data.user }
+			});
+		}
+
+		throw redirect(303, '/dashboard');
 	}
 };
