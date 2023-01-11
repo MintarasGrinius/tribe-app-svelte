@@ -58,6 +58,23 @@
 				/>
 			</div>
 			<div class="relative mb-4">
+				<label for="description" class="leading-7 text-sm text-gray-400">Description</label>
+				<textarea
+					id="description"
+					name="description"
+					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+				/>
+			</div>
+			<div class="relative mb-4">
+				<label for="location" class="leading-7 text-sm text-gray-400">Location</label>
+				<input
+					type="text"
+					id="location"
+					name="location"
+					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+				/>
+			</div>
+			<div class="relative mb-4">
 				<label for="date" class="leading-7 text-sm text-gray-400">Date</label>
 				<input
 					type="date"
@@ -69,13 +86,22 @@
 				/>
 			</div>
 			<div class="relative mb-4">
-				<label for="description" class="leading-7 text-sm text-gray-400">Description</label>
-				<textarea
-					id="description"
-					name="description"
-					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 h-32 text-base outline-none text-gray-100 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+				<label for="type" class="leading-7 text-sm text-gray-400">Type</label>
+				<input
+					id="type"
+					name="type"
+					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 			</div>
+			<div class="relative mb-4">
+				<label for="theme" class="leading-7 text-sm text-gray-400">Theme</label>
+				<input
+					id="theme"
+					name="theme"
+					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+				/>
+			</div>
+
 			<button
 				type="submit"
 				class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg"
