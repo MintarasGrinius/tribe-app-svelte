@@ -13,14 +13,12 @@ export const actions: Actions = {
 			name: string;
 			password: string;
 			passwordConfirm: string;
-			avatar: File;
+			avatar: any;
 		};
 
 		console.log('avatar', avatar, avatar?.name, avatar?.type, avatar?.size);
 		try {
-			await locals.pb
-				.collection('users')
-				.create({ email, name, password, passwordConfirm, avatar });
+			await locals.pb.collection('users').create(formData);
 			await locals.pb.collection('users').authWithPassword(email, password);
 		} catch (error: any) {
 			const { data } = error.data;
@@ -28,7 +26,7 @@ export const actions: Actions = {
 				email: { message: data?.email?.message, value: email },
 				name: { message: name ? data?.name?.message : 'Cannot be blank.', value: name },
 				password: { message: data?.password?.message, value: password },
-				avatar: { message: data?.avatar?.message, value: avatar.name },
+				avatar: { message: data?.avatar?.message },
 				passwordConfirm: {
 					message: data?.passwordConfirm?.message,
 					value: passwordConfirm
