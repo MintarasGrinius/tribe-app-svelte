@@ -1,12 +1,7 @@
 <script lang="ts">
 	/** @type {import('./$types').ActionData} */
 	export let form;
-
-	let selectedDate: string;
-
-	function handleDateChange(event) {
-		selectedDate = event.target.value;
-	}
+	console.log(form);
 </script>
 
 <section class="text-gray-400 bg-gray-900 body-font relative">
@@ -54,6 +49,7 @@
 					type="text"
 					id="title"
 					name="title"
+					value="title"
 					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 			</div>
@@ -62,8 +58,31 @@
 				<textarea
 					id="description"
 					name="description"
+					value="description description description description description description description"
 					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
+			</div>
+			<div class="relative">
+				<label for="photo"
+					><div class="leading-7 text-sm text-gray-400">Profile image</div>
+					<div
+						class="cursor-pointer flex items-center justify-between px-3 h-10 w-full bg-gray-600 overflow-hidden bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 leading-8 transition-colors duration-200 ease-in-out"
+					>
+						<img src={'/icons/upload.svg'} alt="Upload icon" class="h-5 w-5 gray-400" />
+						<input
+							id="photo"
+							name="photo"
+							type="file"
+							accept="image/*"
+							value={form?.photo?.value || ''}
+						/>
+					</div>
+				</label>
+				<div class="h-5">
+					{#if form?.photo?.message}
+						<p class="error text-red-500 text-xs">{form?.avatar?.message}</p>
+					{/if}
+				</div>
 			</div>
 			<div class="relative mb-4">
 				<label for="location" class="leading-7 text-sm text-gray-400">Location</label>
@@ -71,6 +90,7 @@
 					type="text"
 					id="location"
 					name="location"
+					value="location"
 					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 			</div>
@@ -78,8 +98,7 @@
 				<label for="date" class="leading-7 text-sm text-gray-400">Date</label>
 				<input
 					type="date"
-					bind:value={selectedDate}
-					on:change={handleDateChange}
+					value={'2023-01-11'}
 					name="date"
 					id="date"
 					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
@@ -90,6 +109,7 @@
 				<input
 					id="type"
 					name="type"
+					value="type"
 					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 			</div>
@@ -98,6 +118,7 @@
 				<input
 					id="theme"
 					name="theme"
+					value="theme"
 					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 			</div>

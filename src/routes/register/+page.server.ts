@@ -16,7 +16,6 @@ export const actions: Actions = {
 			avatar: any;
 		};
 
-		console.log('avatar', avatar, avatar?.name, avatar?.type, avatar?.size);
 		try {
 			await locals.pb.collection('users').create(formData);
 			await locals.pb.collection('users').authWithPassword(email, password);
