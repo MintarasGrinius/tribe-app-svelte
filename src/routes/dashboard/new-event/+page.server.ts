@@ -5,7 +5,7 @@ import type { Actions } from '@sveltejs/kit';
 export const actions: Actions = {
 	default: async ({ locals, request }) => {
 		const data = await request.formData();
-		data.set('owner', locals.user.id);
+		data.set('owner', locals?.user ? locals?.user.id : '');
 		const { title, description, location, date, type, theme, photo } = Object.fromEntries([
 			...data
 		]) as {
@@ -29,7 +29,7 @@ export const actions: Actions = {
 				date: { message: data?.email?.message, value: date },
 				type: { message: data?.email?.message, value: type },
 				theme: { message: data?.email?.message, value: theme },
-				photo: { message: data?.email?.message, value: photo }
+				photo: { message: data?.email?.message }
 			});
 		}
 
