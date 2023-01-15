@@ -6,16 +6,13 @@ export const actions: Actions = {
 	default: async ({ locals, request }) => {
 		const data = await request.formData();
 		data.set('owner', locals?.user ? locals?.user.id : '');
-		const { title, description, location, date, type, theme, photo } = Object.fromEntries([
-			...data
-		]) as {
+		const { title, description, location, date, type, theme } = Object.fromEntries([...data]) as {
 			title: string;
 			description: string;
 			location: string;
 			date: string;
 			type: string;
 			theme: string;
-			photo: any;
 		};
 
 		try {
@@ -23,13 +20,13 @@ export const actions: Actions = {
 		} catch (error: any) {
 			const { data } = error.data;
 			return fail(400, {
-				title: { message: data?.email?.message, value: title },
-				description: { message: data?.email?.message, value: description },
-				location: { message: data?.email?.message, value: location },
-				date: { message: data?.email?.message, value: date },
-				type: { message: data?.email?.message, value: type },
-				theme: { message: data?.email?.message, value: theme },
-				photo: { message: data?.email?.message }
+				title: { message: data?.title?.message, value: title },
+				description: { message: data?.description?.message, value: description },
+				location: { message: data?.location?.message, value: location },
+				date: { message: data?.date?.message, value: date },
+				type: { message: data?.type?.message, value: type },
+				theme: { message: data?.theme?.message, value: theme },
+				photo: { message: data?.photo?.message }
 			});
 		}
 

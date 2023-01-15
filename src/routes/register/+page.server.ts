@@ -6,14 +6,11 @@ import type { Actions } from '@sveltejs/kit';
 export const actions: Actions = {
 	default: async ({ locals, request }) => {
 		const formData = await request.formData();
-		const { email, name, password, passwordConfirm, avatar } = Object.fromEntries([
-			...formData
-		]) as {
+		const { email, name, password, passwordConfirm } = Object.fromEntries([...formData]) as {
 			email: string;
 			name: string;
 			password: string;
 			passwordConfirm: string;
-			avatar: any;
 		};
 
 		try {

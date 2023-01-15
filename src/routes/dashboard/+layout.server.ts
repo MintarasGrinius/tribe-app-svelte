@@ -10,7 +10,7 @@ export const load = async ({ locals }) => {
 
 	if (locals.user) {
 		return {
-			user: locals.user,
+			user: { ...locals.user, avatar: locals.pb.getFileUrl(locals.user, locals.user?.avatar) },
 			events: sliceToChunks(
 				events.map((event: Record) => ({
 					...event,
