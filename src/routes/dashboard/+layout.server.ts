@@ -14,7 +14,7 @@ export const load = async ({ locals }) => {
 			events: sliceToChunks(
 				events.map((event: Record) => ({
 					...event,
-					photo: locals.pb.getFileUrl(event, event?.photo).replace(':80', '')
+					photo: locals.pb.getFileUrl(event, event?.photo).replace(':80/', '')
 				})),
 				6
 			)
