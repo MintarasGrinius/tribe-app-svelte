@@ -5,7 +5,7 @@ import { redirect, type Handle } from '@sveltejs/kit';
 
 /** @type {import('@sveltejs/kit').Handle} */
 export const handle = (async ({ event, resolve }) => {
-	event.locals.pb = new PocketBase('http://127.0.0.1:8090');
+	event.locals.pb = new PocketBase('http://143.42.19.106:80');
 
 	// load the store data from the request cookie string
 	event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');
