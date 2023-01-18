@@ -13,7 +13,6 @@ export const handle = (async ({ event, resolve }) => {
 		// For development
 		event.locals.pb = new PocketBase(env.PUBLIC_POCKETBASE_URL);
 	}
-	console.log('import.meta.env', env.PUBLIC_POCKETBASE_URL);
 	// load the store data from the request cookie string
 	event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');
 
