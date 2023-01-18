@@ -1,4 +1,3 @@
-import { PUBLIC_POCKETBASE_URL } from '$env/static/public';
 import { serializeNonPOJOs } from './lib/helpers';
 // src/hooks.server.js
 import PocketBase from 'pocketbase';
@@ -11,7 +10,7 @@ export const handle = (async ({ event, resolve }) => {
 		event.locals.pb = new PocketBase(process.env.PUBLIC_POCKETBASE_URL);
 	} else {
 		// For development
-		event.locals.pb = new PocketBase(PUBLIC_POCKETBASE_URL);
+		event.locals.pb = new PocketBase(import.meta.env.PUBLIC_POCKETBASE_URL);
 	}
 
 	// load the store data from the request cookie string
