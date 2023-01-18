@@ -5,7 +5,7 @@
 	export let data: PageData;
 </script>
 
-<div class="p-5 flex flex-wrap w-screen">
+<div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
 	<div class="flex flex-wrap md:-m-2 -m-1">
 		{#each data.events as event}
 			<div class="flex flex-wrap w-1/2">
