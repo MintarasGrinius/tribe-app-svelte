@@ -5,7 +5,13 @@ import { redirect, type Handle } from '@sveltejs/kit';
 
 /** @type {import('@sveltejs/kit').Handle} */
 export const handle = (async ({ event, resolve }) => {
-	event.locals.pb = new PocketBase('http://143.42.19.106:80');
+	if (process.env.NODE_ENV === 'production') {
+		// For production
+		event.locals.pb = new PocketBase(process.env.PUBLIC_POCKETBASE_URL);
+	} else {
+		// For development
+		event.locals.pb = new PocketBase(import.meta.env.PUBLIC_POCKETBASE_URL);
+	}
 
 	// load the store data from the request cookie string
 	event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');
