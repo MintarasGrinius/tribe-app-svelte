@@ -1,6 +1,6 @@
-import { PUBLIC_POCKETBASE_URL } from '$env/static/public';
 import PocketBase from 'pocketbase';
 import { writable } from 'svelte/store';
+import { PUBLIC_POCKETBASE_URL } from './env';
 
 export const pb = new PocketBase(PUBLIC_POCKETBASE_URL);
 
