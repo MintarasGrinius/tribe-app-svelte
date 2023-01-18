@@ -5,7 +5,7 @@ export let pb;
 
 if (process.env.NODE_ENV === 'production') {
 	// For production
-	pb = process.env.PUBLIC_POCKETBASE_URL;
+	pb = new PocketBase(process.env.PUBLIC_POCKETBASE_URL);
 } else {
 	// For development
 	pb = new PocketBase(import.meta.env.PUBLIC_POCKETBASE_URL);
