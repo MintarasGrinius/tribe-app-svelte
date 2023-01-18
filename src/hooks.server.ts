@@ -1,4 +1,4 @@
-import { PUBLIC_POCKETBASE_URL } from '$env/static/public';
+import { env } from '$env/dynamic/public';
 import { serializeNonPOJOs } from './lib/helpers';
 // src/hooks.server.js
 import PocketBase from 'pocketbase';
@@ -11,9 +11,9 @@ export const handle = (async ({ event, resolve }) => {
 		event.locals.pb = new PocketBase(process.env.PUBLIC_POCKETBASE_URL);
 	} else {
 		// For development
-		event.locals.pb = new PocketBase(PUBLIC_POCKETBASE_URL);
+		event.locals.pb = new PocketBase(env.PUBLIC_POCKETBASE_URL);
 	}
-
+	console.log('import.meta.env', env.PUBLIC_POCKETBASE_URL);
 	// load the store data from the request cookie string
 	event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');
 
