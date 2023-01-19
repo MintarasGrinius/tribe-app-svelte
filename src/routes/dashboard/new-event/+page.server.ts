@@ -26,7 +26,11 @@ export const actions: Actions = {
 				date: { message: data?.date?.message, value: date },
 				type: { message: data?.type?.message, value: type },
 				theme: { message: data?.theme?.message, value: theme },
-				photo: { message: data?.photo?.message }
+				photo: {
+					message: data?.photo?.message.includes('The following mime types are only allowed')
+						? 'Missing required value.'
+						: data?.photo?.message
+				}
 			});
 		}
 
