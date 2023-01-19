@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Record } from 'pocketbase';
 	export let event: Record;
-	console.log('event', event.photo);
 </script>
 
 {#if !!event?.photo}
