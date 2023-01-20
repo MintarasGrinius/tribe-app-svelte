@@ -4,7 +4,8 @@ import { serializeNonPOJOs, sliceToChunks } from './../../lib/helpers';
 export const load = async ({ locals }) => {
 	const events = serializeNonPOJOs(
 		await locals.pb.collection('events').getFullList(200 /* batch size */, {
-			sort: '-created'
+			sort: '-created',
+			expand: 'owner'
 		})
 	);
 
