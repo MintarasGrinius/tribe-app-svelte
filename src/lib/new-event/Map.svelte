@@ -3,7 +3,7 @@
 		[key: string]: string;
 	};
 
-	$: ({ title, description, location, date, type, theme } = formValues);
+	export let { title, description, location, date, type, theme } = formValues;
 </script>
 
 <div
