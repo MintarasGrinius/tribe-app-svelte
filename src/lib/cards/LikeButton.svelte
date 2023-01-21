@@ -7,31 +7,29 @@
 	let referenceElement;
 	let effect = false;
 
-	const likeEvent: SubmitFunction = ({ data }) => {
+	const likeEvent: SubmitFunction = ({ data, cancel }) => {
 		data.set('event', event.id);
-
+		event.liked && cancel();
 		return async ({ result: { status }, update }) => {
 			await update();
-			console.log(status);
+			if (status && status < 400) {
+				effect = true;
+				setTimeout(() => {
+					effect = false;
+				}, 1200);
+			}
 		};
 	};
 </script>
 
 <form class="ml-auto" method="POST" action="?/like" use:enhance={likeEvent}>
 	<button
-		on:click={() => {
-			effect = true;
-			setTimeout(() => {
-				effect = false;
-			}, 1200);
-		}}
 		bind:this={referenceElement}
 		class={`rounded-full w-10 h-10 p-0 border-0 inline-flex items-center justify-center ${
 			event.liked
 				? 'text-gray-500 bg-gray-800 cursor-default'
 				: 'bg-red-500 text-red-300 cursor-pointer animate-pulse'
-		}
-		${effect && 'animate-wiggle'}
+		} ${effect && 'animate-wiggle'}
 		`}
 	>
 		<svg

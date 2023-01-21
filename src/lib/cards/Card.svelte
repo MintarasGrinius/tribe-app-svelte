@@ -4,7 +4,6 @@
 
 	export let event: Record & { expand: { owner: { [key: string]: string } } };
 	let showModal = false;
-	console.log(event);
 </script>
 
 {#if showModal}

@@ -12,5 +12,15 @@ export const actions: Actions = {
 		} catch {
 			return fail(400);
 		}
+	},
+	attend: async ({ locals, request }) => {
+		const data = await request.formData();
+		locals.user && data.set('user', locals?.user.id);
+
+		try {
+			await locals.pb.collection('requests_to_attend').create(data);
+		} catch {
+			return fail(400);
+		}
 	}
 };

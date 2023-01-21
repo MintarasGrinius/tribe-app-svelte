@@ -3,6 +3,7 @@
 	import type { Record } from 'pocketbase';
 	import { createEventDispatcher, onDestroy } from 'svelte';
 	import Popover from 'svelte-easy-popover';
+	import AttendButton from './AttendButton.svelte';
 	import LikeButton from './LikeButton.svelte';
 
 	const dispatch = createEventDispatcher();
@@ -63,10 +64,7 @@
 							>
 
 							<LikeButton {event} />
-							<button
-								class="flex ml-4 text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded"
-								>I wish to attend!</button
-							>
+							<AttendButton {event} />
 						</div>
 					</div>
 				</div>
