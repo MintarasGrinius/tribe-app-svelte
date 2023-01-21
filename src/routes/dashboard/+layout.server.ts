@@ -28,7 +28,8 @@ export const load = async ({ locals }) => {
 				),
 				requested: request.some(
 					(request: Record) => request.event === event.id && request.user === locals.user.id
-				)
+				),
+				requests: request.filter((request: Record) => request.event === event.id).length
 			}))
 		};
 	}

@@ -22,7 +22,7 @@
 					{event.description}
 				</p>
 			</div>
-			<div class="flex items-center justify-between gap-1 flex-wrap">
+			<div class="flex justify-between flex-wrap gap-x-10">
 				<button
 					on:click={() => (showModal = true)}
 					class="text-red-400 inline-flex items-center justify-between mb-0 md:text-xs lg:text-base"
@@ -40,12 +40,9 @@
 						<path d="M12 5l7 7-7 7" />
 					</svg>
 				</button>
-				<div class="md:text-sm">
-					<span
-						class="text-gray-500 mr-3 md:mr-1 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none pr-3 md:pr-2 py-1 border-r-2 border-gray-800"
-					>
+				<div class="flex items-center justify-between gap-2 flex-wrap md:text-sm mt-2 flex-auto">
+					<span class="text-gray-500 inline-flex items-center leading-none text-sm">
 						<svg
-							fill="none"
 							stroke="currentColor"
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -54,7 +51,7 @@
 							viewBox="0 0 24 24"
 						>
 							<path
-								d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+								d="M23,10C23,8.89 22.1,8 21,8H14.68L15.64,3.43C15.66,3.33 15.67,3.22 15.67,3.11C15.67,2.7 15.5,2.32 15.23,2.05L14.17,1L7.59,7.58C7.22,7.95 7,8.45 7,9V19A2,2 0 0,0 9,21H18C18.83,21 19.54,20.5 19.84,19.78L22.86,12.73C22.95,12.5 23,12.26 23,12V10M1,21H5V9H1V21Z"
 							/>
 						</svg>
 						{event.likes}
@@ -63,14 +60,29 @@
 						<svg
 							class="w-4 h-4 mr-1"
 							stroke="currentColor"
-							stroke-width="2"
 							fill="none"
+							stroke-width="2"
 							stroke-linecap="round"
 							stroke-linejoin="round"
 							viewBox="0 0 24 24"
 						>
 							<path
-								d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"
+								d="M15,14C12.33,14 7,15.33 7,18V20H23V18C23,15.33 17.67,14 15,14M6,10V7H4V10H1V12H4V15H6V12H9V10M15,12A4,4 0 0,0 19,8A4,4 0 0,0 15,4A4,4 0 0,0 11,8A4,4 0 0,0 15,12Z"
+							/>
+						</svg>
+						{event.requests}
+					</span>
+					<span class="text-gray-500 inline-flex items-center leading-none text-sm">
+						<svg
+							class="w-4 h-4 mr-1"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							viewBox="0 0 24 24"
+						>
+							<path
+								d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1 12,5.5M5,8C5.56,8 6.08,8.15 6.53,8.42C6.38,9.85 6.8,11.27 7.66,12.38C7.16,13.34 6.16,14 5,14A3,3 0 0,1 2,11A3,3 0 0,1 5,8M19,8A3,3 0 0,1 22,11A3,3 0 0,1 19,14C17.84,14 16.84,13.34 16.34,12.38C17.2,11.27 17.62,9.85 17.47,8.42C17.92,8.15 18.44,8 19,8M5.5,18.25C5.5,16.18 8.41,14.5 12,14.5C15.59,14.5 18.5,16.18 18.5,18.25V20H5.5V18.25M0,20V18.5C0,17.11 1.89,15.94 4.45,15.6C3.86,16.28 3.5,17.22 3.5,18.25V20H0M24,20H20.5V18.25C20.5,17.22 20.14,16.28 19.55,15.6C22.11,15.94 24,17.11 24,18.5V20Z"
 							/>
 						</svg>6
 					</span>

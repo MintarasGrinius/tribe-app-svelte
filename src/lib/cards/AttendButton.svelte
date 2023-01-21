@@ -29,7 +29,7 @@
 			event.requested
 				? 'text-gray-500 bg-gray-800 cursor-default'
 				: 'bg-red-500 text-white cursor-pointer hover:bg-red-600'
-		} ${effect && 'animate-wiggle'}`}
+		} ${effect && 'animate-ping'}`}
 		>{event.requested ? 'Already requested' : 'I wish to attend!'}</button
 	>
 </form>
@@ -40,7 +40,6 @@
 			!event.requested && 'hidden'
 		}`}
 	>
-		You have request attendance for this event! Please wait for the event owner to accept your
-		request.
+		{'You have request attendance for this event! Please wait for the event owner to accept your request.'}
 	</div>
 </Popover>
