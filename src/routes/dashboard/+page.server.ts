@@ -3,7 +3,7 @@ import { redirect, fail } from '@sveltejs/kit';
 import type { Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {
-	default: async ({ locals, request }) => {
+	like: async ({ locals, request }) => {
 		const data = await request.formData();
 		locals.user && data.set('user', locals?.user.id);
 
