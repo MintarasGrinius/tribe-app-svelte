@@ -1,7 +1,5 @@
 <script lang="ts">
-	import BigCard from '$lib/cards/BigCard.svelte';
 	import Card from '$lib/cards/Card.svelte';
-	import LittleCard from '$lib/cards/LittleCard.svelte';
 	import type { PageData } from './$types';
 	export let data: PageData;
 </script>
