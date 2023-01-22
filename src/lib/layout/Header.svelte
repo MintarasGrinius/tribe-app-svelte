@@ -1,7 +1,8 @@
-<script lang="ts">
+<script>
 	import CreateNewButton from './CreateNewButton.svelte';
 	import Logo from './Logo.svelte';
-	export let user: any;
+	/** @type {import('pocketbase').Record} */
+	export let user;
 </script>
 
 <header class="text-gray-400 sticky top-0 bg-gray-900/50 body-font">

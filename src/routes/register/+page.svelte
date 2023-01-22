@@ -1,12 +1,6 @@
-<script lang="ts">
+<script>
 	/** @type {import('./$types').ActionData} */
-	export let form: {
-		email: { value: string; message: string };
-		name: { value: string; message: string };
-		password: { value: string; message: string };
-		passwordConfirm: { value: string; message: string };
-		avatar: { value: string; message: string };
-	};
+	export let form;
 </script>
 
 <section class="text-gray-400 z-50 bg-gray-900 body-font h-screen">
@@ -62,13 +56,7 @@
 						class="cursor-pointer flex items-center justify-between px-3 h-10 w-full bg-gray-600 overflow-hidden bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 leading-8 transition-colors duration-200 ease-in-out"
 					>
 						<img src={'/icons/upload.svg'} alt="Upload icon" class="h-5 w-5 gray-400" />
-						<input
-							id="avatar"
-							name="avatar"
-							type="file"
-							accept="image/*"
-							value={form?.avatar?.value || ''}
-						/>
+						<input id="avatar" name="avatar" type="file" accept="image/*" value={''} />
 					</div>
 				</label>
 				<div class="h-5">

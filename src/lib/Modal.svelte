@@ -1,6 +1,8 @@
-<script lang="ts">
-	export let showModal: boolean;
-	export let toggleModal: () => void;
+<script>
+	/** @type {boolean} */
+	export let showModal;
+	/** @type {() => void} */
+	export let toggleModal;
 </script>
 
 {#if showModal}

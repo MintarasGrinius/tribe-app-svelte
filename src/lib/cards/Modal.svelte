@@ -1,24 +1,24 @@
-<script lang="ts">
-	import { enhance, type SubmitFunction } from '$app/forms';
-	import type { Record } from 'pocketbase';
+<script>
 	import { createEventDispatcher, onDestroy } from 'svelte';
-	import Popover from 'svelte-easy-popover';
 	import AttendButton from './AttendButton.svelte';
 	import LikeButton from './LikeButton.svelte';
 
 	const dispatch = createEventDispatcher();
 	const close = () => dispatch('close');
 
-	let modal: HTMLElement;
+	/** @type {HTMLElement} */
+	let modal;
 
-	const handle_keydown = (e: any) => {
+	/** @type {(e: {key: string}) => void} */
+	const handle_keydown = (e) => {
 		if (e.key === 'Escape') {
 			close();
 			return;
 		}
 	};
 
-	export let event: Record & { expand: { owner: { [key: string]: string } } };
+	/** @type {import('pocketbase').Record & { expand: { owner: { name: string } } }} */
+	export let event;
 </script>
 
 <svelte:window on:keydown={handle_keydown} />

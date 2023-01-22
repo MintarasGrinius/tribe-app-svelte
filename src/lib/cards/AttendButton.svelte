@@ -1,13 +1,13 @@
-<script lang="ts">
-	import { enhance, type SubmitFunction } from '$app/forms';
-	import type { Record } from 'pocketbase';
+<script>
+	import { enhance } from '$app/forms';
 	import Popover from 'svelte-easy-popover';
-
-	export let event: Record & { expand: { owner: { [key: string]: string } } };
+	/** @type {import('pocketbase').Record} */
+	export let event;
 	let referenceElement;
 	let effect = false;
 
-	const attendEvent: SubmitFunction = ({ data, cancel }) => {
+	/** @type {import('$app/forms').SubmitFunction} */
+	const attendEvent = ({ data, cancel }) => {
 		data.set('event', event.id);
 		event.requested && cancel();
 		return async ({ result: { status }, update }) => {

@@ -1,8 +1,8 @@
-<script lang="ts">
-	import type { Record } from 'pocketbase';
+<script>
 	import Modal from './Modal.svelte';
 
-	export let event: Record & { expand: { owner: { [key: string]: string } } };
+	/** @type {import('pocketbase').Record} */
+	export let event;
 	let showModal = false;
 </script>
 

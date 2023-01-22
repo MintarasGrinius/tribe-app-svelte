@@ -1,16 +1,13 @@
-<script lang="ts">
+<script>
 	import FormHeader from '$lib/new-event/FormHeader.svelte';
 	import Map from '$lib/new-event/Map.svelte';
-	export let form: {
-		[key: string]: {
-			message: string;
-			value: string;
-		};
-	};
+	/** @type {import('./$types').ActionData} */
+	export let form;
+
 	let formValues = {
 		title: form?.title?.value || '',
 		description: form?.description?.value || '',
-		photo: form?.photo?.value || '',
+		photo: '',
 		date: form?.date?.value || '',
 		location: form?.location?.value || '',
 		type: form?.type?.value || '',

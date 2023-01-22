@@ -1,7 +1,6 @@
-<script lang="ts">
-	export let formValues: {
-		[key: string]: string;
-	};
+<script>
+	/** @type { ({ title: string, description: string, location: string, date: string, type: string, theme: string }) } */
+	export let formValues;
 
 	export let { title, description, location, date, type, theme } = formValues;
 </script>
