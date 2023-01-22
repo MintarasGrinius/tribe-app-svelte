@@ -9,10 +9,10 @@
 	<div
 		class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-between"
 	>
-		<nav class="flex flex-wrap items-center text-base">
+		<a href="/dashboard/profile" class="flex flex-wrap items-center text-base">
 			<img src={user?.avatar} class="w-10 h-10 text-white rounded-full mr-4" alt="Avatar" />
 			<div>{user?.name}</div>
-		</nav>
+		</a>
 		<Logo />
 		<div class="inline-flex lg:justify-end items-center ml-5 lg:ml-0">
 			<form action="/logout" method="POST">
