@@ -1,3 +1,4 @@
+import { serializeNonPOJOs } from './../../../lib/helpers';
 /** @type {import('./$types').Actions} */
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from '@sveltejs/kit';
@@ -15,12 +16,19 @@ export const actions: Actions = {
 			facebook: string;
 			description: string;
 		};
-
+		console.log("dataToUse.get('user_detail')", dataToUse.get('user_detail'));
 		try {
-			await locals.pb.collection('user_details').create(dataToUse);
+			let result = serializeNonPOJOs(
+				dataToUse.get('user_detail')
+					? await locals.pb
+							.collection('user_details')
+							.update(dataToUse.get('user_detail'), dataToUse)
+					: await locals.pb.collection('user_details').create(dataToUse)
+			);
+			console.log(result);
+			return result;
 		} catch (error: any) {
 			const { data } = error.data;
-			console.log('datadatadatadatadatadatadatadata', data);
 			return data;
 		}
 	}

@@ -8,19 +8,29 @@
 	/** @type {import('./$types').ActionData} */
 	export let form;
 	console.log(form);
-	let formValues = {
-		phone_number: form?.phone_number?.value || data.user_detail.phone_number || '',
-		date_of_birth: form?.date_of_birth?.value || data.user_detail.date_of_birth || '',
-		instagram: form?.instagram?.value || data.user_detail.instagram || '',
-		facebook: form?.facebook?.value || data.user_detail.facebook || '',
-		description: form?.description?.value || data.user_detail.description || ''
-	};
+	let formValues = data.user_detail
+		? {
+				phone_number: data.user_detail.phone_number || '',
+				date_of_birth: data.user_detail.date_of_birth.slice(0, 10) || '',
+				instagram: data.user_detail.instagram || '',
+				facebook: data.user_detail.facebook || '',
+				description: data.user_detail.description || ''
+		  }
+		: {};
 
 	/** @type {import('$app/forms').SubmitFunction} */
-	const changeDetails = ({ data, cancel }) => {
+	const changeDetails = ({ data: d, cancel }) => {
+		data?.user_detail?.id && d.set('user_detail', data.user_detail.id);
+		/** @type {() => Promise<void>} */
 		return async ({ result, update }) => {
 			await update();
-			console.log(result);
+			formValues = {
+				phone_number: result?.data?.phone_number,
+				date_of_birth: result?.data?.date_of_birth.slice(0, 10),
+				instagram: result?.data?.instagram,
+				facebook: result?.data?.facebook,
+				description: result?.data?.description
+			};
 		};
 	};
 </script>
