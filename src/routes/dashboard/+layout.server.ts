@@ -8,13 +8,16 @@ export const load = async ({ locals }) => {
 			expand: 'owner'
 		})
 	);
-
-	const feelings = await locals.pb.collection('likes').getFullList(200, {
-		sort: '-created'
-	});
-	const request = await locals.pb.collection('requests_to_attend').getFullList(200, {
-		sort: '-created'
-	});
+	let feelings = [];
+	let request = [];
+	try {
+		feelings = await locals.pb.collection('likes').getFullList(200, {
+			sort: '-created'
+		});
+		request = await locals.pb.collection('requests_to_attend').getFullList(200, {
+			sort: '-created'
+		});
+	} catch (error) {}
 
 	if (locals.user) {
 		return {
