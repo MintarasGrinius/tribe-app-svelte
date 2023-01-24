@@ -5,10 +5,8 @@
 
 	/** @type {import('./$types').PageData} */
 	export let data;
-	console.log(data);
 	/** @type {import('./$types').ActionData} */
 	export let form;
-	console.log(form);
 	let formValues = data.user_detail
 		? {
 				phone_number: data.user_detail.phone_number || '',
@@ -53,7 +51,6 @@
 </script>
 
 <section class="text-gray-400 bg-gray-900 body-font relative">
-	<button on:click={() => toast.success('It works!')}> info! </button>
 	<div class="flex justify-center flex-col items-center mt-20">
 		<h2 class="text-white text-lg mb-1 font-medium title-font">Profile</h2>
 		<p class="leading-relaxed mb-5 w-1/2 text-center">
