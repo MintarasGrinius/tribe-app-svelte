@@ -1,8 +1,10 @@
 <script>
 	import './styles.css';
+	import { Toaster } from 'svelte-french-toast';
 </script>
 
 <div class="app">
+	<Toaster />
 	<main class="min-h-screen">
 		<slot />
 	</main>

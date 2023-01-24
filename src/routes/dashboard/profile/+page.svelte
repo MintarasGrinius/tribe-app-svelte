@@ -1,6 +1,7 @@
 <script>
 	import { enhance } from '$app/forms';
 	import Steps from '$lib/profile/Steps.svelte';
+	import toast from 'svelte-french-toast';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -24,18 +25,35 @@
 		/** @type {() => Promise<void>} */
 		return async ({ result, update }) => {
 			await update();
-			formValues = {
-				phone_number: result?.data?.phone_number,
-				date_of_birth: result?.data?.date_of_birth.slice(0, 10),
-				instagram: result?.data?.instagram,
-				facebook: result?.data?.facebook,
-				description: result?.data?.description
-			};
+			console.log(result);
+
+			if (result.data.success) {
+				formValues = {
+					phone_number: result?.data?.phone_number,
+					date_of_birth: result?.data?.date_of_birth.slice(0, 10),
+					instagram: result?.data?.instagram,
+					facebook: result?.data?.facebook,
+					description: result?.data?.description
+				};
+
+				toast.success('Profile updated successfully');
+			} else {
+				formValues = {
+					phone_number: data.user_detail.phone_number,
+					date_of_birth: data.user_detail.date_of_birth.slice(0, 10),
+					instagram: data.user_detail.instagram,
+					facebook: data.user_detail.facebook,
+					description: data.user_detail.description
+				};
+				form = result.data.data;
+				toast.error('Something went wrong, please try again later');
+			}
 		};
 	};
 </script>
 
 <section class="text-gray-400 bg-gray-900 body-font relative">
+	<button on:click={() => toast.success('It works!')}> info! </button>
 	<div class="flex justify-center flex-col items-center mt-20">
 		<h2 class="text-white text-lg mb-1 font-medium title-font">Profile</h2>
 		<p class="leading-relaxed mb-5 w-1/2 text-center">

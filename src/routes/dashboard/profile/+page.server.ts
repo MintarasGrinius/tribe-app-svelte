@@ -22,14 +22,13 @@ export const actions: Actions = {
 				dataToUse.get('user_detail')
 					? await locals.pb
 							.collection('user_details')
-							.update(dataToUse.get('user_detail'), dataToUse)
+							.update(dataToUse?.get('user_detail'), dataToUse)
 					: await locals.pb.collection('user_details').create(dataToUse)
 			);
-			console.log(result);
-			return result;
+			return { success: true, ...result };
 		} catch (error: any) {
 			const { data } = error.data;
-			return data;
+			return { success: false, data };
 		}
 	}
 };
