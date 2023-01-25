@@ -3,9 +3,12 @@ import { serializeNonPOJOs } from './lib/helpers';
 // src/hooks.server.js
 import PocketBase from 'pocketbase';
 import { redirect, type Handle } from '@sveltejs/kit';
-
+import { createClient } from '@supabase/supabase-js';
+import './lib/subabaseClient';
 /** @type {import('@sveltejs/kit').Handle} */
 export const handle = (async ({ event, resolve }) => {
+	const supabase = createClient(env.PUBLIC_SUPABASE_URL, env.PUBLIC_SUPABASE_ANON_KEY);
+
 	if (process.env.NODE_ENV === 'production') {
 		// For production
 		event.locals.pb = new PocketBase(process.env.PUBLIC_POCKETBASE_URL);
@@ -13,6 +16,7 @@ export const handle = (async ({ event, resolve }) => {
 		// For development
 		event.locals.pb = new PocketBase(env.PUBLIC_POCKETBASE_URL);
 	}
+	event.locals.supabase = supabase;
 	// load the store data from the request cookie string
 	event.locals.pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');
 

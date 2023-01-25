@@ -1,13 +1,16 @@
+import { getServerSession } from '@supabase/auth-helpers-sveltekit';
 import { redirect } from '@sveltejs/kit';
+import type { LayoutServerLoad } from './$types';
 import { serializeNonPOJOs } from './../lib/helpers';
-export const load = ({ locals }) => {
-	if (locals.user) {
+export const load: LayoutServerLoad = async (event) => {
+	if (event.locals.user) {
 		return {
-			user: locals.user
+			user: event.locals.user
 		};
 	}
 
 	return {
-		user: undefined
+		user: undefined,
+		session: await getServerSession(event)
 	};
 };

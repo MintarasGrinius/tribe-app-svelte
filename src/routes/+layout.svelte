@@ -1,6 +1,21 @@
 <script>
 	import './styles.css';
 	import { Toaster } from 'svelte-french-toast';
+	import { onMount } from 'svelte';
+	import { supabase } from '$lib/subabaseClient';
+	import { invalidate } from '$app/navigation';
+
+	onMount(() => {
+		const {
+			data: { subscription }
+		} = supabase.auth.onAuthStateChange(() => {
+			invalidate('supabase:auth');
+		});
+
+		return () => {
+			subscription.unsubscribe();
+		};
+	});
 </script>
 
 <div class="app">
