@@ -4,6 +4,9 @@
 	import { page } from '$app/stores';
 	import Account from '$lib/Account.svelte';
 	import Auth from '$lib/Auth.svelte';
+	import Dashboard from '$lib/Dashboard.svelte';
+	/** @type {import('./$types').PageData} */
+	export let data;
 </script>
 
 <svelte:head>
@@ -14,5 +17,5 @@
 {#if !$page.data.session}
 	<Auth {form} />
 {:else}
-	<Account session={$page.data.session} />
+	<Dashboard {data} session={$page.data.session} />
 {/if}

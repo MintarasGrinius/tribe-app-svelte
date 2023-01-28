@@ -1,3 +1,4 @@
+import { supabase } from './lib/subabaseClient';
 import { PocketBase } from 'pocketbase';
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
@@ -6,10 +7,12 @@ declare global {
 	declare namespace App {
 		// interface Error {}
 		interface Locals {
-			pb: import('pocketbase').default;
-			user: import('pocketbase').default['authStore']['model'];
+			sb: import('@supabase/auth-helpers-sveltekit/dist/types').SupabaseClient;
+			session: import('@supabase/supabase-js').Session | null;
 		}
-		// interface PageData {}
+		interface PageData {
+			session: import('@supabase/supabase-js').Session | null;
+		}
 		// interface Platform {}
 	}
 }

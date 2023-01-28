@@ -4,6 +4,8 @@
 	import { onMount } from 'svelte';
 	import { supabase } from '$lib/subabaseClient';
 	import { invalidate } from '$app/navigation';
+	import Header from '$lib/layout/Header.svelte';
+	import Footer from '$lib/layout/Footer.svelte';
 
 	onMount(() => {
 		const {
@@ -16,12 +18,20 @@
 			subscription.unsubscribe();
 		};
 	});
+
+	/** @type {import('./$types').PageData} */
+	export let data;
+	console.log(data);
 </script>
 
 <div class="app">
 	<Toaster />
 	<main class="min-h-screen">
-		<slot />
+		<section class="text-gray-400 bg-gray-900 body-font min-h-screen flex flex-col">
+			<Header avatar={data.avatar_url} user={data.session.user} />
+			<slot />
+			<Footer />
+		</section>
 	</main>
 </div>
 
