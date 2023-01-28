@@ -1,21 +1,37 @@
-<script lang="ts">
-	import { enhance, type SubmitFunction } from '$app/forms';
-	import { supabase } from './subabaseClient';
-
-	/** @type {import('./$types').ActionData} */
-	export let form;
-	console.log(form);
+<script>
+	import { enhance } from '$app/forms';
+	import { z } from 'zod';
+	import { serializeNonPOJOs } from './helpers';
+	import toast from 'svelte-french-toast';
 	let loading = false;
-	let email: string;
-	let error = false;
+	let error = '';
+	const errorMessage = 'Please provide valid email!';
 
-	const changeDetails: SubmitFunction = () => {
+	/** @type {import('$app/forms').SubmitFunction} */
+	const changeDetails = ({ cancel, data }) => {
 		loading = true;
+		const validation = z
+			.string({
+				required_error: errorMessage
+			})
+			.email({
+				message: errorMessage
+			})
+			.safeParse(data.get('email'));
+
+		if (!validation.success) {
+			error = serializeNonPOJOs(validation.error).issues[0].message;
+			loading = false;
+			cancel();
+			return;
+		}
 		return async ({ result, update }) => {
+			error = '';
 			await update();
-			console.log(result);
-			if (result.status !== 200) {
-				error = true;
+			if (result.type === 'failure' && result?.data?.error) {
+				error = result?.data.error;
+			} else {
+				toast.success('Login link has been sent to your email!');
 			}
 			loading = false;
 		};
@@ -43,14 +59,13 @@
 				<label for="full-name" class="leading-7 text-sm text-gray-400">Email</label>
 				<input
 					value={'email@email.co'}
-					type="email"
 					id="email"
 					name="email"
 					class="w-full bg-gray-600 bg-opacity-20 focus:bg-transparent focus:ring-2 focus:ring-red-900 rounded border border-gray-600 focus:border-red-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
 					{#if error}
-						<p class="error text-red-500 text-xs">{'Something went wrong'}</p>
+						<p class="error text-red-500 text-xs animate-headShake">{error}</p>
 					{/if}
 				</div>
 			</div>
