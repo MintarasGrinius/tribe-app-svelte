@@ -1,6 +1,10 @@
 <script>
+	import { enhance } from '$app/forms';
+	import { z } from 'zod';
+	import { serializeNonPOJOs } from '$lib/helpers';
 	import FormHeader from '$lib/new-event/FormHeader.svelte';
 	import Map from '$lib/new-event/Map.svelte';
+	import toast from 'svelte-french-toast';
 	/** @type {import('./$types').ActionData} */
 	export let form;
 
@@ -13,6 +17,51 @@
 		type: form?.type?.value || '',
 		theme: form?.theme?.value || ''
 	};
+
+	let loading = false;
+	/** @type {import('zod').ZodFormattedError<{ title: string; location: string; date: string; type: string; photos: { name: string }; description: string; theme: string; }, string> | null} */
+	let error;
+	const errorMessage = 'Please provide valid email!';
+
+	/** @type {import('$app/forms').SubmitFunction} */
+	const changeDetails = ({ cancel, data }) => {
+		console.log(Object.fromEntries([...data]));
+		loading = true;
+		const validation = z
+			.object({
+				title: z.string().min(1, { message: 'Title is required!' }),
+				description: z.string().min(1, { message: 'Description is required!' }),
+				photos: z
+					.object({
+						name: z.string().min(1, { message: 'Photo is required!' })
+					})
+					.required(),
+				location: z.string().min(1, { message: 'Location is required!' }),
+				date: z.string().min(1, { message: 'Date is required!' }),
+				type: z.string().min(1, { message: 'Type is required!' }),
+				theme: z.string().min(1, { message: 'Theme is required!' })
+			})
+			.safeParse(Object.fromEntries([...data]));
+
+		if (!validation.success) {
+			error = validation.error.format();
+			console.log(error);
+			loading = false;
+			cancel();
+			return;
+		}
+		return async ({ result, update }) => {
+			console.log(result);
+			error = null;
+			await update();
+			if (result.type === 'failure' && result?.data?.error) {
+				error = result?.data.error;
+			} else {
+				toast.success('Login link has been sent to your email!');
+			}
+			loading = false;
+		};
+	};
 </script>
 
 <section class="text-gray-400 bg-gray-900 body-font relative">
@@ -21,6 +70,7 @@
 
 		<form
 			enctype="multipart/form-data"
+			use:enhance={changeDetails}
 			method="POST"
 			class="lg:w-1/3 md:w-1/2 flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0"
 		>
@@ -35,8 +85,8 @@
 					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
-					{#if form?.title?.message}
-						<p class="error text-red-500 text-xs">{form?.title?.message}</p>
+					{#if error?.title?._errors[0]}
+						<p class="error text-red-500 text-xs">{error?.title?._errors[0]}</p>
 					{/if}
 				</div>
 			</div>
@@ -49,8 +99,8 @@
 					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
-					{#if form?.description?.message}
-						<p class="error text-red-500 text-xs">{form?.description?.message}</p>
+					{#if error?.description?._errors[0]}
+						<p class="error text-red-500 text-xs">{error?.description._errors[0]}</p>
 					{/if}
 				</div>
 			</div>
@@ -71,8 +121,8 @@
 					</div>
 				</label>
 				<div class="h-5">
-					{#if form?.photo?.message}
-						<p class="error text-red-500 text-xs">{form?.photo?.message}</p>
+					{#if error?.photos?.name?._errors[0]}
+						<p class="error text-red-500 text-xs">{error?.photos?.name._errors[0]}</p>
 					{/if}
 				</div>
 			</div>
@@ -86,8 +136,8 @@
 					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
-					{#if form?.location?.message}
-						<p class="error text-red-500 text-xs">{form?.location?.message}</p>
+					{#if error?.location?._errors[0]}
+						<p class="error text-red-500 text-xs">{error?.location._errors[0]}</p>
 					{/if}
 				</div>
 			</div>
@@ -101,8 +151,8 @@
 					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
-					{#if form?.date?.message}
-						<p class="error text-red-500 text-xs">{form?.date?.message}</p>
+					{#if error?.date?._errors[0]}
+						<p class="error text-red-500 text-xs">{error?.date._errors[0]}</p>
 					{/if}
 				</div>
 			</div>
@@ -115,8 +165,8 @@
 					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
-					{#if form?.type?.message}
-						<p class="error text-red-500 text-xs">{form?.type?.message}</p>
+					{#if error?.type?._errors[0]}
+						<p class="error text-red-500 text-xs">{error?.type._errors[0]}</p>
 					{/if}
 				</div>
 			</div>
@@ -129,8 +179,8 @@
 					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 				/>
 				<div class="h-5">
-					{#if form?.theme?.message}
-						<p class="error text-red-500 text-xs">{form?.theme?.message}</p>
+					{#if error?.theme?._errors[0]}
+						<p class="error text-red-500 text-xs">{error?.theme._errors[0]}</p>
 					{/if}
 				</div>
 			</div>
