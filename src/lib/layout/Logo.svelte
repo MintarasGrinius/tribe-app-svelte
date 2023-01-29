@@ -1,6 +1,6 @@
 <a
 	class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-white lg:items-center lg:justify-center mb-4 md:mb-0"
-	href="/dashboard"
+	href="/"
 >
 	<svg
 		xmlns="http://www.w3.org/2000/svg"

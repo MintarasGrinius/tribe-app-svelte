@@ -21,16 +21,19 @@
 
 	/** @type {import('./$types').PageData} */
 	export let data;
-	console.log(data);
 </script>
 
 <div class="app">
 	<Toaster />
 	<main class="min-h-screen">
 		<section class="text-gray-400 bg-gray-900 body-font min-h-screen flex flex-col">
-			<Header avatar={data.avatar_url} user={data.session.user} />
+			{#if data?.session?.user}
+				<Header avatar={data.avatar_url} user={data.session.user} />
+			{/if}
 			<slot />
-			<Footer />
+			{#if data?.session?.user}
+				<Footer />
+			{/if}
 		</section>
 	</main>
 </div>
