@@ -11,7 +11,7 @@
 {/if}
 <div class="p-4 md:w-1/3">
 	<div class="h-full border-2 border-gray-800 rounded-lg overflow-hidden flex flex-col">
-		<img class="lg:h-48 md:h-36 w-full object-cover object-center" src={event?.photo} alt="blog" />
+		<img class="lg:h-48 md:h-36 w-full object-cover object-center" src={event?.photos} alt="blog" />
 		<div class="p-6 flex justify-between flex-col h-full">
 			<div>
 				<h2 class="tracking-widest text-xs title-font font-medium text-gray-500 mb-1">

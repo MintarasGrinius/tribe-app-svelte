@@ -5,6 +5,7 @@
 	import Dashboard from '$lib/Dashboard.svelte';
 	/** @type {import('./$types').PageData} */
 	export let data;
+	console.log(data);
 </script>
 
 <svelte:head>
@@ -15,5 +16,5 @@
 {#if !$page.data.session}
 	<Auth />
 {:else}
-	<Dashboard {data} session={$page.data.session} />
+	<Dashboard events={data.events} />
 {/if}

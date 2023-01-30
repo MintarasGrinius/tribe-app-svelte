@@ -1,6 +1,6 @@
 import type { PageLoad } from './$types';
 
-export const load = (({ params }) => {
+export const load = (({ params, fetch }) => {
 	//	check to see if the user is authenticated
 	// if (!pb.authStore.isValid) {
 	// 	//	if not, redirect them to "/login"

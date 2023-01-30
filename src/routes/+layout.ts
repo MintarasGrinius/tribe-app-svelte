@@ -6,5 +6,5 @@ import { page } from '$app/stores';
 export const load: LayoutLoad = async (event) => {
 	const { session } = await getSupabase(event);
 
-	return { session: session, avatar_url: event.data.avatar_url };
+	return { session: session, avatar_url: event.data.avatar_url, events: event.data.events };
 };
