@@ -5,45 +5,51 @@
 
 	/** @type {import('./$types').PageData} */
 	export let data;
+	console.log('data', data);
 	/** @type {import('./$types').ActionData} */
 	export let form;
-	let formValues = data.user_detail
+	let formValues = data.profile
 		? {
-				phone_number: data.user_detail.phone_number || '',
-				date_of_birth: data.user_detail.date_of_birth.slice(0, 10) || '',
-				instagram: data.user_detail.instagram || '',
-				facebook: data.user_detail.facebook || '',
-				description: data.user_detail.description || ''
+				full_name: data.profile.full_name || '',
+				phone_number: data.profile.phone_number || '',
+				date_of_birth: data.profile.date_of_birth.slice(0, 10) || '',
+				instagram: data.profile.instagram || '',
+				facebook: data.profile.facebook || '',
+				description: data.profile.description || ''
 		  }
 		: {};
 
 	/** @type {import('$app/forms').SubmitFunction} */
 	const changeDetails = ({ data: d, cancel }) => {
-		data?.user_detail?.id && d.set('user_detail', data.user_detail.id);
 		/** @type {() => Promise<void>} */
 		return async ({ result, update }) => {
 			await update();
+			console.log('result');
+			console.log('result');
+			console.log('result');
 			console.log(result);
 
 			if (result.data.success) {
-				formValues = {
-					phone_number: result?.data?.phone_number,
-					date_of_birth: result?.data?.date_of_birth.slice(0, 10),
-					instagram: result?.data?.instagram,
-					facebook: result?.data?.facebook,
-					description: result?.data?.description
-				};
+				// formValues = {
+				// 	full_name: result?.data?.full_name,
+				// 	phone_number: result?.data?.phone_number,
+				// 	date_of_birth: result?.data?.date_of_birth,
+				// 	instagram: result?.data?.instagram,
+				// 	facebook: result?.data?.facebook,
+				// 	description: result?.data?.description
+				// };
 
 				toast.success('Profile updated successfully');
 			} else {
-				formValues = {
-					phone_number: data.user_detail.phone_number,
-					date_of_birth: data.user_detail.date_of_birth.slice(0, 10),
-					instagram: data.user_detail.instagram,
-					facebook: data.user_detail.facebook,
-					description: data.user_detail.description
-				};
-				form = result.data.data;
+				// formValues = {
+				// 	full_name: data.profile.full_name,
+				// 	phone_number: data.profile.phone_number,
+				// 	date_of_birth: data.profile.date_of_birth.slice(0, 10),
+				// 	instagram: data.profile.instagram,
+				// 	facebook: data.profile.facebook,
+				// 	description: data.profile.description
+				// };
+				// form = result.data.data;
 				toast.error('Something went wrong, please try again later');
 			}
 		};
@@ -65,6 +71,20 @@
 			class="lg:w-1/3 md:w-1/2 flex flex-col w-full md:py-8 mt-8 md:mt-0"
 			use:enhance={changeDetails}
 		>
+			<div class="relative mb-4">
+				<label for="full_name" class="leading-7 text-sm text-gray-400">Full name</label>
+				<input
+					id="full_name"
+					name="full_name"
+					bind:value={formValues.full_name}
+					class="w-full bg-gray-800 rounded border border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+				/>
+				<div class="h-5">
+					{#if form?.full_name?.message}
+						<p class="error text-red-500 text-xs">{form?.full_name?.message}</p>
+					{/if}
+				</div>
+			</div>
 			<div class="relative mb-4">
 				<label for="phone_number" class="leading-7 text-sm text-gray-400">Phone number</label>
 				<input

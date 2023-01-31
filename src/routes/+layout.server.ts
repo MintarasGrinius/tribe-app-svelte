@@ -19,7 +19,7 @@ export const load: LayoutServerLoad = async (event) => {
 			let { data: events } = await event.locals.sb
 				.from('events')
 				.select(
-					'date,description,id,location,owner,profiles (avatar_url, username),photos,theme,title,type'
+					'date,description,id,location,owner,profiles (avatar_url,username),photos,theme,title,type'
 				);
 
 			const { data: signedUrls } = await event.locals.sb.storage

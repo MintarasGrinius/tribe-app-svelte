@@ -13,6 +13,26 @@
 			</svg>
 		</div>
 		<div class="flex-grow pl-4">
+			<h2 class="font-medium title-font text-sm text-white mb-1 tracking-wider">Full name</h2>
+			<p class="leading-relaxed">
+				Please provide your full name to make applications more personal.
+			</p>
+		</div>
+	</div>
+	<div class="flex relative pb-12">
+		<div class="h-full w-10 absolute inset-0 flex items-center justify-center">
+			<div class="h-full w-1 bg-gray-800 pointer-events-none" />
+		</div>
+		<div
+			class="flex-shrink-0 w-10 h-10 rounded-full bg-red-500 inline-flex items-center justify-center text-white relative z-10"
+		>
+			<svg fill="currentColor" class="w-5 h-5" viewBox="0 0 24 24">
+				<path
+					d="M9,10H7V12H9V10M13,10H11V12H13V10M17,10H15V12H17V10M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z"
+				/>
+			</svg>
+		</div>
+		<div class="flex-grow pl-4">
 			<h2 class="font-medium title-font text-sm text-white mb-1 tracking-wider">Phone number</h2>
 			<p class="leading-relaxed">
 				Some events organizers like to share event details via phone. Only visible to event
