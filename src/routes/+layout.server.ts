@@ -16,7 +16,11 @@ export const load: LayoutServerLoad = async (event) => {
 				data: { publicUrl }
 			} = await event.locals.sb.storage.from('avatars').getPublicUrl(avatar_url);
 
-			let { data: events } = await event.locals.sb.from('events').select('*');
+			let { data: events } = await event.locals.sb
+				.from('events')
+				.select(
+					'date,description,id,location,owner,profiles (avatar_url, username),photos,theme,title,type'
+				);
 
 			const { data: signedUrls } = await event.locals.sb.storage
 				.from('event-photos')

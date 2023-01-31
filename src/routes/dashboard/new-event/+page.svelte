@@ -1,7 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
 	import { z } from 'zod';
-	import { serializeNonPOJOs } from '$lib/helpers';
 	import FormHeader from '$lib/new-event/FormHeader.svelte';
 	import Map from '$lib/new-event/Map.svelte';
 	import toast from 'svelte-french-toast';
@@ -57,7 +56,9 @@
 			if (result.type === 'failure' && result?.data?.error) {
 				error = result?.data.error;
 			} else {
-				toast.success('Login link has been sent to your email!');
+				toast.success('Event created successfully!', {
+					style: 'border-radius: 200px; background: #333; color: #fff;'
+				});
 			}
 			loading = false;
 		};

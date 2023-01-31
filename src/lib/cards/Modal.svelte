@@ -1,5 +1,5 @@
 <script>
-	import { createEventDispatcher, onDestroy } from 'svelte';
+	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
 	import AttendButton from './AttendButton.svelte';
 	import LikeButton from './LikeButton.svelte';
 
@@ -16,6 +16,10 @@
 			return;
 		}
 	};
+
+	onMount(() => {
+		console.log(event);
+	});
 
 	/** @type {import('pocketbase').Record & { expand: { owner: { name: string } } }} */
 	export let event;
@@ -50,7 +54,7 @@
 								{event.theme}
 							</span>
 							<span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-800 text-gray-500 space-x-2">
-								{event.expand.owner.name}
+								<!-- {event.expand.owner.name} -->
 							</span>
 						</div>
 						<p class="leading-relaxed min-h-[5rem]">
