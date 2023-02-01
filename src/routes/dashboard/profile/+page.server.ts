@@ -27,7 +27,15 @@ export const actions: Actions = {
 					description
 				})
 				.eq('id', locals.session?.user.id);
-			return { success: true };
+			console.log('data', dataToUse);
+			return {
+				full_name,
+				phone_number,
+				date_of_birth,
+				instagram,
+				facebook,
+				description
+			};
 		} catch (error: any) {
 			const { data } = error.data;
 			return { success: false, data };

@@ -1,55 +1,32 @@
 <script>
-	import { enhance } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
 	import Steps from '$lib/profile/Steps.svelte';
+	import { onMount } from 'svelte';
 	import toast from 'svelte-french-toast';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
-	console.log('data', data);
+
 	/** @type {import('./$types').ActionData} */
 	export let form;
-	let formValues = data.profile
-		? {
-				full_name: data.profile.full_name || '',
-				phone_number: data.profile.phone_number || '',
-				date_of_birth: data.profile.date_of_birth.slice(0, 10) || '',
-				instagram: data.profile.instagram || '',
-				facebook: data.profile.facebook || '',
-				description: data.profile.description || ''
-		  }
-		: {};
+
+	let formValues = { ...data.profile };
+
+	onMount(() => {
+		formValues = data.profile;
+	});
 
 	/** @type {import('$app/forms').SubmitFunction} */
-	const changeDetails = ({ data: d, cancel }) => {
+	const changeDetails = () => {
 		/** @type {() => Promise<void>} */
 		return async ({ result, update }) => {
 			await update();
-			console.log('result');
-			console.log('result');
-			console.log('result');
-			console.log(result);
 
-			if (result.data.success) {
-				// formValues = {
-				// 	full_name: result?.data?.full_name,
-				// 	phone_number: result?.data?.phone_number,
-				// 	date_of_birth: result?.data?.date_of_birth,
-				// 	instagram: result?.data?.instagram,
-				// 	facebook: result?.data?.facebook,
-				// 	description: result?.data?.description
-				// };
-
+			if (result.status === 200) {
+				formValues = { ...result?.data };
 				toast.success('Profile updated successfully');
 			} else {
-				// formValues = {
-				// 	full_name: data.profile.full_name,
-				// 	phone_number: data.profile.phone_number,
-				// 	date_of_birth: data.profile.date_of_birth.slice(0, 10),
-				// 	instagram: data.profile.instagram,
-				// 	facebook: data.profile.facebook,
-				// 	description: data.profile.description
-				// };
-				// form = result.data.data;
+				formValues = { ...data.profile };
 				toast.error('Something went wrong, please try again later');
 			}
 		};
