@@ -13,14 +13,10 @@ export const load: LayoutServerLoad = async (event) => {
 				.eq('id', event.locals.session?.user.id);
 
 			const {
-				data: { publicUrl }
-			} = await event.locals.sb.storage.from('avatars').getPublicUrl(avatar_url);
+				data: { signedUrl }
+			} = await event.locals.sb.storage.from('avatars').createSignedUrl(avatar_url, 60);
 
-			let { data: events } = await event.locals.sb
-				.from('events')
-				.select(
-					'date,description,id,location,owner,profiles (avatar_url,username),photos,theme,title,type'
-				);
+			let { data: events } = await event.locals.sb.from('events').select('*');
 
 			const { data: signedUrls } = await event.locals.sb.storage
 				.from('event-photos')
@@ -30,7 +26,7 @@ export const load: LayoutServerLoad = async (event) => {
 				);
 
 			return {
-				avatar_url: publicUrl,
+				avatar_url: signedUrl,
 				session: session,
 				events: events.map((a: Object, index: number) => {
 					return {
