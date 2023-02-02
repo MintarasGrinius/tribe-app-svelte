@@ -14,7 +14,7 @@ export const load: LayoutServerLoad = async (event) => {
 
 			const {
 				data: { signedUrl }
-			} = await event.locals.sb.storage.from('avatars').createSignedUrl(avatar_url, 60);
+			} = await event.locals.sb.storage.from('avatars').createSignedUrl(avatar_url, 600);
 
 			let { data: events } = await event.locals.sb.from('events').select('*');
 

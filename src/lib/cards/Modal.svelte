@@ -41,7 +41,7 @@
 				<img
 					alt="ecommerce"
 					class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-					src={event?.photo}
+					src={event?.photos}
 				/>
 				<div class="lg:w-1/2 w-full lg:p-10 m-6 lg:m-0 flex justify-between flex-col">
 					<div>
