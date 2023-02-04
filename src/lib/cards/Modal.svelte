@@ -54,7 +54,7 @@
 								{event.theme}
 							</span>
 							<span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-800 text-gray-500 space-x-2">
-								<!-- {event.expand.owner.name} -->
+								{event.owner.full_name}
 							</span>
 						</div>
 						<p class="leading-relaxed min-h-[5rem]">

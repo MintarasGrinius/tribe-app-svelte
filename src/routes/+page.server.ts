@@ -5,12 +5,12 @@ import type { Actions } from '@sveltejs/kit';
 import { AuthApiError } from '@supabase/supabase-js';
 
 export const actions: Actions = {
-	default: async ({ request }) => {
+	login: async ({ locals, request }) => {
 		const formData = await request.formData();
 		const { email } = Object.fromEntries([...formData]) as {
 			email: string;
 		};
-		const { error: err } = await supabase.auth.signInWithOtp({ email });
+		const { error: err } = await locals.sb.auth.signInWithOtp({ email });
 
 		if (err) {
 			if (err instanceof AuthApiError) {
@@ -22,5 +22,16 @@ export const actions: Actions = {
 				error: 'Something went wrong. Please try again later.'
 			});
 		}
+	},
+	like: async ({ locals, request }) => {
+		const formData = await request.formData();
+		const { event } = Object.fromEntries([...formData]);
+
+		const { data, error } = await locals.sb
+			.from('likes')
+			.insert([{ user: locals.session?.user.id, event: event }]);
+		console.log(data);
+		console.log(error);
+		return { success: true };
 	}
 };

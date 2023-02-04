@@ -22,7 +22,7 @@
 				<button class="mr-5 hover:text-white">Log Out</button>
 			</form>
 			<a href="/" class="hover:text-white mr-5">Events</a>
-			<a href="/dashboard/requests" class="hover:text-white mr-5">Requests</a>
+			<a href="/requests" class="hover:text-white mr-5">Requests</a>
 			<CreateNewButton />
 		</div>
 	</div>

@@ -13,6 +13,7 @@
 		event.liked && cancel();
 		return async ({ result: { status }, update }) => {
 			await update();
+			console.log(status);
 			if (status && status < 400) {
 				effect = true;
 				setTimeout(() => {

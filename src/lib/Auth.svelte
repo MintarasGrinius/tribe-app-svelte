@@ -50,6 +50,7 @@
 			</p>
 		</div>
 		<form
+			action="?/login"
 			use:enhance={changeDetails}
 			method="POST"
 			class="lg:w-2/6 md:w-1/2 bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0"
