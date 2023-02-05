@@ -1,4 +1,5 @@
 <script>
+	import { supabase } from '$lib/subabaseClient';
 	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
 	import AttendButton from './AttendButton.svelte';
 	import LikeButton from './LikeButton.svelte';
@@ -6,8 +7,14 @@
 	const dispatch = createEventDispatcher();
 	const close = () => dispatch('close');
 
+	/** @type {string | undefined}*/
+	export let userId;
+	/** @type {import('pocketbase').Record & { expand: { owner: { name: string } } }} */
+	export let event;
 	/** @type {HTMLElement} */
 	let modal;
+	/** @type {boolean} */
+	let liked = false;
 
 	/** @type {(e: {key: string}) => void} */
 	const handle_keydown = (e) => {
@@ -17,12 +24,15 @@
 		}
 	};
 
-	onMount(() => {
-		console.log(event);
-	});
+	onMount(async () => {
+		let { data: dataResponse } = await supabase
+			.from('likes')
+			.select('id')
+			.eq('user', userId)
+			.eq('event', event.id);
 
-	/** @type {import('pocketbase').Record & { expand: { owner: { name: string } } }} */
-	export let event;
+		liked = !!dataResponse?.[0];
+	});
 </script>
 
 <svelte:window on:keydown={handle_keydown} />
@@ -67,7 +77,7 @@
 								>{event.date.slice(0, 10)}</span
 							>
 
-							<LikeButton {event} />
+							<LikeButton {event} {liked} />
 							<AttendButton {event} />
 						</div>
 					</div>

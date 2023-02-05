@@ -1,13 +1,15 @@
 <script>
 	import Modal from './Modal.svelte';
 
-	/** @type {import('pocketbase').Record} */
+	/** @type {import('pocketbase').Record & { expand: { owner: { name: string } } }} */
 	export let event;
+	/** @type {string | undefined}*/
+	export let userId;
 	let showModal = false;
 </script>
 
 {#if showModal}
-	<Modal {event} on:close={() => (showModal = false)} />
+	<Modal {event} {userId} on:close={() => (showModal = false)} />
 {/if}
 <div class="p-4 md:w-1/3">
 	<div class="h-full border-2 border-gray-800 rounded-lg overflow-hidden flex flex-col">

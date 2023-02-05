@@ -5,8 +5,8 @@ module.exports = {
 		extend: {
 			keyframes: {
 				wiggle: {
-					'0%, 100%': { transform: 'rotate(-9deg)' },
-					'50%': { transform: 'rotate(9deg)' }
+					'0%, 100%': { transform: 'rotate(-15deg)' },
+					'50%': { transform: 'rotate(15deg)' }
 				},
 				heartBeat: {
 					'0%': { transform: 'scale(1);' },

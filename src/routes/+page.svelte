@@ -16,5 +16,5 @@
 {#if !$page.data.session}
 	<Auth />
 {:else}
-	<Dashboard events={data.events} />
+	<Dashboard {data} />
 {/if}

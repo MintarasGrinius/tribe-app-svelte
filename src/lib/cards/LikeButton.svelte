@@ -7,18 +7,24 @@
 	let referenceElement;
 	let effect = false;
 
+	/** @type {boolean} */
+	export let liked;
+
 	/** @type {import('$app/forms').SubmitFunction} */
 	const likeEvent = ({ data, cancel }) => {
-		data.set('event', event.id);
-		event.liked && cancel();
+		if (liked) cancel();
+		else {
+			data.set('event', event.id);
+			liked = true;
+			effect = true;
+			setTimeout(() => {
+				effect = false;
+			}, 1200);
+		}
 		return async ({ result: { status }, update }) => {
 			await update();
-			console.log(status);
-			if (status && status < 400) {
-				effect = true;
-				setTimeout(() => {
-					effect = false;
-				}, 1200);
+			if (status && status > 400) {
+				liked = false;
 			}
 		};
 	};
@@ -28,7 +34,7 @@
 	<button
 		bind:this={referenceElement}
 		class={`rounded-full w-10 h-10 p-0 border-0 inline-flex items-center justify-center ${
-			event.liked
+			liked
 				? 'text-gray-500 bg-gray-800 cursor-default'
 				: 'bg-red-500 text-red-300 cursor-pointer animate-pulse'
 		} ${effect && 'animate-wiggle'}
@@ -53,7 +59,7 @@
 <Popover triggerEvents={['hover']} {referenceElement} placement="bottom" spaceAway={5}>
 	<div
 		class={`border border-black border-solid rounded py-1 px-3 bg-neutral-600/25 ${
-			!event.liked && 'hidden'
+			!liked && 'hidden'
 		}`}
 	>
 		Event already liked!
