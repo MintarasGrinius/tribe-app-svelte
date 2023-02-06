@@ -27,11 +27,20 @@ export const actions: Actions = {
 		const formData = await request.formData();
 		const { event } = Object.fromEntries([...formData]);
 
-		const { data, error } = await locals.sb
+		const { error } = await locals.sb
 			.from('likes')
 			.insert([{ user: locals.session?.user.id, event: event }]);
-		console.log(data);
-		console.log(error);
-		return { success: true };
+
+		return { success: !error };
+	},
+	attend: async ({ locals, request }) => {
+		const formData = await request.formData();
+		const { event } = Object.fromEntries([...formData]);
+
+		const { error } = await locals.sb
+			.from('requests')
+			.insert([{ user: locals.session?.user.id, event: event }]);
+
+		return { success: !error };
 	}
 };

@@ -15,6 +15,8 @@
 	let modal;
 	/** @type {boolean} */
 	let liked = false;
+	/** @type {boolean} */
+	let requested = false;
 
 	/** @type {(e: {key: string}) => void} */
 	const handle_keydown = (e) => {
@@ -29,9 +31,17 @@
 			.from('likes')
 			.select('id')
 			.eq('user', userId)
+			.eq('event', event.id)
+			.single();
+
+		let { data: dataResponsee } = await supabase
+			.from('requests')
+			.select('id')
+			.eq('user', userId)
 			.eq('event', event.id);
 
-		liked = !!dataResponse?.[0];
+		liked = !!dataResponse;
+		requested = !!dataResponsee?.length;
 	});
 </script>
 
@@ -78,7 +88,7 @@
 							>
 
 							<LikeButton {event} {liked} />
-							<AttendButton {event} />
+							<AttendButton {event} {requested} />
 						</div>
 					</div>
 				</div>
