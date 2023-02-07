@@ -3,6 +3,10 @@
 
 	/** @type {import('./$types').PageData} */
 	export let data;
+	console.log('data', data);
+
+	export let requests;
+	console.log('requests', requests);
 </script>
 
 <section class="text-gray-400 bg-gray-900 body-font">

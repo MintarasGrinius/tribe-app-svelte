@@ -1,30 +1,20 @@
-import { serializeNonPOJOs } from './../../../lib/helpers';
+import type { LayoutServerLoad } from './$types';
 
-export const load = async ({ locals }: { locals: any }) => {
-	const requests = serializeNonPOJOs(
-		await locals.pb.collection('requests_to_attend').getFullList(200 /* batch size */, {
-			sort: '-created',
-			expand: 'event,user'
-		})
-	);
-
-	if (locals.user) {
-		return {
-			requests: requests.map((request: any) => ({
-				...request,
-				expand: {
-					...request?.expand,
-					user: {
-						...request?.expand?.user,
-						avatar: locals.pb.getFileUrl(request?.expand.user, request?.expand.user?.avatar)
-					}
-				}
-			}))
-		};
-	}
+export const load: LayoutServerLoad = async ({ locals }) => {
+	let { data: requests, error } = await locals.sb
+		.from('requests')
+		.select('user (full_name, avatar_url), event (title)');
+	console.log(requests, error);
 
 	return {
-		user: undefined,
-		events: []
+		requests: requests.map(async (request: Object) => {
+			const {
+				data: { signedUrl }
+			} = await locals.sb.storage.from('avatars').createSignedUrl(request.user.avatar_url, 600);
+			return {
+				...request,
+				avatar: signedUrl
+			};
+		})
 	};
 };

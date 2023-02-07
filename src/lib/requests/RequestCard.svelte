@@ -1,14 +1,15 @@
 <script>
 	import Modal from './Modal.svelte';
 
-	/** @type {{ expand: { user: { avatar: string, name: string }, event: { title: string }}}} */
+	/** @type {{ user: { avatar: string, full_name: string }, event: { title: string, photo: string }}} */
 	export let request;
+	console.log(request);
 	let showModal = false;
 </script>
 
-{#if showModal}
+<!-- {#if showModal}
 	<Modal {request} on:close={() => (showModal = false)} />
-{/if}
+{/if} -->
 <div class="p-4 lg:w-1/2" on:click={() => (showModal = true)}>
 	<div
 		class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left bg-white/5 rounded"
@@ -16,16 +17,16 @@
 		<img
 			alt="team"
 			class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-			src={request.expand.user.avatar}
+			src={request.avatar}
 		/>
 		<div class="flex-grow sm:pl-8 flex justify-between flex-col h-full py-4">
 			<div>
 				<h2 class="title-font font-medium text-lg text-white">
-					{request.expand.user.name}
+					{request?.user?.full_name ? request.user.full_name : ''}
 				</h2>
 				<h3 class="text-gray-500 mb-3">UI Developer</h3>
 				<p class="mb-4">
-					{`I wish to attend your event: ${request.expand.event.title}`}
+					{`I wish to attend your event: ${request?.event?.title}`}
 				</p>
 			</div>
 			<span class="inline-flex">
