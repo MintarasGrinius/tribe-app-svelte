@@ -1,23 +1,32 @@
 <script>
+	import { supabase } from '$lib/subabaseClient';
+	import { onMount } from 'svelte';
 	import Modal from './Modal.svelte';
 
-	/** @type {{ user: { avatar: string, full_name: string }, event: { title: string, photo: string }}} */
+	/** @type {{ user: { avatar_url: string, full_name: string }, event: { title: string, photo: string }}} */
 	export let request;
 	console.log(request);
 	let showModal = false;
+	let avatar = '';
+	onMount(async () => {
+		let { data } = await supabase.storage
+			.from('avatars')
+			.createSignedUrl(request.user.avatar_url, 600);
+		avatar = data?.signedUrl || '';
+	});
 </script>
 
 <!-- {#if showModal}
 	<Modal {request} on:close={() => (showModal = false)} />
 {/if} -->
-<div class="p-4 lg:w-1/2" on:click={() => (showModal = true)}>
+<div class="p-4 lg:w-1/2" on:keypress on:click={() => (showModal = true)}>
 	<div
 		class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left bg-white/5 rounded"
 	>
 		<img
 			alt="team"
 			class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-			src={request.avatar}
+			src={avatar}
 		/>
 		<div class="flex-grow sm:pl-8 flex justify-between flex-col h-full py-4">
 			<div>
