@@ -19,7 +19,7 @@
 <!-- {#if showModal}
 	<Modal {request} on:close={() => (showModal = false)} />
 {/if} -->
-<div class="p-4 lg:w-1/2" on:keypress on:click={() => (showModal = true)}>
+<div class="relative p-4 lg:w-1/2" on:keypress on:click={() => (showModal = true)}>
 	<div
 		class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left bg-white/5 rounded"
 	>
@@ -71,4 +71,12 @@
 			</span>
 		</div>
 	</div>
+	<button
+		class={'absolute right-10 bottom-[-15px] ml-4 border-0 py-2 px-6 focus:outline-none rounded bg-red-500 text-white cursor-pointer hover:bg-red-600'}
+		>Accept</button
+	>
+	<button
+		class={'absolute right-[150px] bottom-[-15px] ml-4 border-0 py-2 px-6 focus:outline-none rounded bg-gray-700 text-white cursor-pointer hover:bg-gray-600'}
+		>Decline</button
+	>
 </div>
