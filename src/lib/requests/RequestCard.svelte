@@ -1,12 +1,14 @@
 <script>
+	import { enhance } from '$app/forms';
 	import { supabase } from '$lib/subabaseClient';
 	import { onMount } from 'svelte';
 	import Modal from './Modal.svelte';
 
-	/** @type {{ user: { avatar_url: string, full_name: string, description: string }, event: { title: string, photo: string }}} */
+	/** @type {{ user: { avatar_url: string, full_name: string, description: string }, event: { title: string, id: string }}} */
 	export let request;
 	console.log(request);
 	let showModal = false;
+	let effect = false;
 	let avatar = '';
 	onMount(async () => {
 		let { data } = await supabase.storage
@@ -14,6 +16,36 @@
 			.createSignedUrl(request.user.avatar_url, 600);
 		avatar = data?.signedUrl || '';
 	});
+
+	/** @type {import('$app/forms').SubmitFunction} */
+	const accept = ({ data }) => {
+		data.set('id', request.event.id);
+
+		return async ({ result: { status }, update }) => {
+			await update();
+			if (status && status < 400) {
+				effect = true;
+				setTimeout(() => {
+					effect = false;
+				}, 1000);
+			}
+		};
+	};
+
+	/** @type {import('$app/forms').SubmitFunction} */
+	const reject = ({ data }) => {
+		data.set('id', request.event.id);
+
+		return async ({ result: { status }, update }) => {
+			await update();
+			if (status && status < 400) {
+				effect = true;
+				setTimeout(() => {
+					effect = false;
+				}, 1000);
+			}
+		};
+	};
 </script>
 
 <!-- {#if showModal}
@@ -71,12 +103,16 @@
 			</span>
 		</div>
 	</div>
-	<button
-		class={'absolute right-10 bottom-[-15px] ml-4 border-0 py-2 px-6 focus:outline-none rounded bg-red-500 text-white cursor-pointer hover:bg-red-600'}
-		>Accept</button
-	>
-	<button
-		class={'absolute right-[150px] bottom-[-15px] ml-4 border-0 py-2 px-6 focus:outline-none rounded bg-gray-700 text-white cursor-pointer hover:bg-gray-600'}
-		>Decline</button
-	>
+	<form method="POST" action="?/accept" use:enhance={accept}>
+		<button
+			class={'absolute right-10 bottom-[-15px] ml-4 border-0 py-2 px-6 focus:outline-none rounded bg-red-500 text-white cursor-pointer hover:bg-red-600'}
+			>Accept</button
+		>
+	</form>
+	<form method="POST" action="?/reject" use:enhance={reject}>
+		<button
+			class={'absolute right-[150px] bottom-[-15px] ml-4 border-0 py-2 px-6 focus:outline-none rounded bg-gray-700 text-white cursor-pointer hover:bg-gray-600'}
+			>Decline</button
+		>
+	</form>
 </div>
